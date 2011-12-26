@@ -1,0 +1,20 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="vnccollab.content">
+    
+  <browser:page
+      name="keywordsautocompletewidget-search"
+      for="*"
+      permission="zope.Public"
+      class=".raptus_autocomplete.KeywordsAutocompleteSearch"
+      />
+
+  <browser:page
+      name="keywordsautocompletewidget-populate"
+      for="*"
+      permission="zope.Public"
+      class=".raptus_autocomplete.KeywordsAutocompletePopulate"
+      />
+
+</configure>

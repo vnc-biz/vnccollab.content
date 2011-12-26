@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<object name="portal_skins">
+
+ <object name="vnccollab_content"
+    meta_type="Filesystem Directory View"
+    directory="vnccollab.content:skins/vnccollab_content"/>
+
+ <skin-path name="*">
+  <layer name="vnccollab_content"
+     insert-after="custom"/>
+ </skin-path>
+
+</object>

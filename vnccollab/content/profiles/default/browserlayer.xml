@@ -1,0 +1,4 @@
+<layers>
+    <layer name="vnccollab.content"
+           interface="vnccollab.content.browser.interfaces.IPackageLayer"/>
+</layers>

@@ -1,0 +1,159 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="autocompletewidget">
+
+<head>
+<title></title>
+</head>
+
+<body>
+
+<!-- Selection Widgets -->
+
+<metal:view_macro define-macro="view">
+
+    <tal:vocab tal:condition="python:field.type!='reference'">
+        <span tal:define="vocab python:field.Vocabulary(here);
+                          value python:accessor();
+                          values python:not(same_type(value, list()) or same_type(value, tuple())) and [value] or value or [];
+                          display python:', '.join([here.displayValue(vocab, x) or x for x in values if x]) or '';"
+              tal:condition="display"
+              tal:replace="display" />
+    </tal:vocab>
+
+    <tal:reference tal:condition="python:field.type=='reference'">
+      <!-- copy of reference widget template -->
+      <tal:define define="refs python:here.getReferenceImpl(field.relationship)"
+                  condition="refs">
+
+        <tal:block tal:condition="not:field/multiValued"
+               tal:define="ref python:refs[0];
+                           obj ref/getTargetObject">
+
+            <a href="#"
+               tal:attributes="href obj/absolute_url;
+                               class python:obj.portal_type.replace(' ', '_')"
+               tal:content="python:obj.Title() or obj.absolute_url(relative=1)">
+              Sole target object's title
+            </a>
+
+            <a href="#"
+               tal:condition="python:portal.portal_interface.objectImplements(ref,'Products.Archetypes.interfaces.referenceengine.IContentReference')"
+               tal:attributes="href python:ref.getContentObject().absolute_url();
+                               class python:obj.portal_type.replace(' ', '_')"
+               tal:content="field/relationship">
+              reference object link
+            </a>
+
+        </tal:block>
+
+        <ul tal:condition="field/multiValued">
+          <li tal:repeat="ref refs">
+             <tal:block tal:define="obj ref/getTargetObject">
+                <a href="#"
+                   tal:attributes="href obj/absolute_url;
+                                   class python:obj.portal_type.replace(' ', '_')"
+                   tal:content="python:obj.Title() or obj.absolute_url(relative=1)">
+                  Target Title
+                </a>
+
+                <a href="#"
+                   tal:condition="python:portal.portal_interface.objectImplements(ref,'Products.Archetypes.interfaces.referenceengine.IContentReference')"
+                   tal:attributes="href python:ref.getContentObject().absolute_url();
+                                   class python:obj.portal_type.replace(' ', '_')"
+                   tal:content="field/relationship">
+                  reference object link
+                </a>
+             </tal:block>
+          </li>
+        </ul>
+
+      </tal:define>
+    </tal:reference>
+
+</metal:view_macro>
+
+<metal:define define-macro="edit">
+
+	<metal:use use-macro="field_macro | here/widgets/field/macros/edit">
+
+		<metal:fill fill-slot="widget_body"
+                    tal:define="vocab python:field.Vocabulary(here);
+                                vocab python: context.collectKeywords(fieldName, field.accessor);
+                                widget_multi field/multiValued;
+                                widget_multi_str python:widget_multi and 'true' or 'false';
+                                value python:value!=None and value or '';
+                                widget_value python:(same_type(value, ()) or same_type(value, [])) and ';;'.join([here.displayValue(vocab, x) or x for x in value]) or here.displayValue(vocab, value) or ''; 
+                                widget_id python:fieldName + (widget_multi and '_toadd_widget' or '_widget');
+                                widget_name python:(not widget_multi) and fieldName or nothing;">
+			<script type="text/javascript"
+                tal:define="esc_vocab python: [v.replace('\'','\\\'') for v in vocab.values()];
+                            vocab_list python: '\'' + '\',\''.join(esc_vocab) + '\''"
+				tal:content="string:
+              var array_${fieldName}=new Array(${vocab_list});
+            ">
+            </script>
+			<div id="" tal:attributes="id python:fieldName" class="autocomplete">
+            <span style="display: none;"
+                  i18n:translate="invalid_value"
+                  tal:attributes="id string:${fieldName}_widget_invalid">Warning! You typed an invalid value, please correct it or it will be ignored.</span>
+			<input
+				onfocus='actb(this,event,customarray, timeout, limit, firsttext);'
+				type='text' value='' id='' autocomplete="off"
+				tal:attributes="name widget_name;
+                                value python:(not widget_multi) and widget_value or '';
+                                size widget/size;
+                                maxlength widget/maxlength;
+                                id widget_id;
+                                onfocus string:actb(this, event, array_${fieldName}, ${widget/actb_timeout},${widget/actb_lim},${widget/actb_firsttext}, ${widget/actb_expand_onfocus}, ${widget/actb_multi_select}, ${widget/actb_complete_on_tab})" />
+            <tal:multi tal:condition="widget_multi">
+                <a class="inline_button add_button" tal:attributes="onclick python:'actb_addValue(\''+fieldName+'\')'"
+                   i18n:attributes="title action_add_title;"
+                   title="Add the value to the list">
+                   <span i18n:translate="action_add">Add</span>
+                </a>
+            </tal:multi>
+			<a class="clear_button"
+                tal:condition="python:getattr(widget, 'actb_show_clear_button', True)"
+				tal:attributes="onclick python:'document.getElementById(\'%s\').value=\'\';;document.getElementById(\'%s\').focus()'%(widget_id, widget_id);
+                                id python:fieldName + '_clear';"
+                i18n:attributes="title action_clear_title;"
+                title="Clear the input field">
+				<span i18n:translate="action_clear">Clear</span>
+            </a>
+            <tal:multi tal:condition="widget_multi">
+				<input type='hidden' value='' id='' autocomplete="off"
+				       tal:attributes="name fieldName;
+	                                   value python:(same_type(widget_value, ()) or same_type(widget_value, [])) and ','.join(widget_value) or widget_value;
+	                                   id python:fieldName + '_widget';" />
+	            <div class="empty_info"
+	                 title="The list is empty, type a value and click the Add button"
+	                 tal:attributes="id python:fieldName + '_widget_empty';"
+	                 i18n:attributes="title empty_list_title;"
+	                 i18n:translate="empty_list">The list is empty</div>
+				<ul id="widget_list"
+					tal:attributes="id python:fieldName + '_widget_list';">
+				</ul>
+				<span tal:attributes="id python:fieldName + '_widget_delete';"
+				      i18n:translate="action_delete"
+                      i18n:attributes="title action_delete_title;"
+                      style="display:none;"
+                      title="Delete from the list">Delete</span>
+	            <script type="text/javascript" charset="iso-8859-1"
+	                tal:content="string:actb_updateListFromValue('${fieldName}');" />
+			</tal:multi>
+            </div>
+
+		</metal:fill>
+
+	</metal:use>
+
+</metal:define>
+
+<div metal:define-macro="search">
+<div metal:use-macro="here/widgets/autocomplete/macros/edit" /></div>
+</body>
+
+</html>

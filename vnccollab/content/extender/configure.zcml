@@ -1,0 +1,11 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    i18n_domain="vnccollab.content">
+
+  <include package="archetypes.schemaextender" />
+  <adapter
+      provides="archetypes.schemaextender.interfaces.ISchemaModifier"
+      factory=".keywords.KeywordsWidgetModifier" />
+
+</configure>
