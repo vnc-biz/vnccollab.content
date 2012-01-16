@@ -15,7 +15,7 @@ class KeywordsAutocompleteSearch(BrowserView):
     def __call__(self):
         context = aq_inner(self.context)
         field = self.request.get('f', None)
-        query = safe_unicode(self.request.get('q', ''))
+        query = self.request.get('q', '')
         limit = self.request.get('limit', None)
         if not query or not field:
             return ''
@@ -36,7 +36,7 @@ class KeywordsAutocompletePopulate(KeywordsAutocompleteSearch):
         results = results.split('\n')
         query = self.request.get('q', '')
         for r in results:
-            if r.startswith(u'%s|' % safe_unicode(query)):
+            if r.startswith('%s|' % query):
                 return r
         
 class KeywordsAutocompleteBaseWidget(base.AutocompleteBaseWidget):
