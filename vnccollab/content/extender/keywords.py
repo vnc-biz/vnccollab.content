@@ -26,7 +26,6 @@ class KeywordsWidgetModifier(object):
         self.context = context
         
     def fiddle(self, schema):
-        # import pdb;pdb.set_trace()
         if schema.get('subject', None) is None:
             return
         
