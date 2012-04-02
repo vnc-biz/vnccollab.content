@@ -2,6 +2,7 @@ from zope.component import adapts
 from zope.interface import implements
 
 from Products.Archetypes.interfaces import IBaseContent
+from  Products.Archetypes.interfaces.base import IBaseObject
 # from Products.Archetypes import public as atapi
 
 from archetypes.schemaextender.interfaces import IBrowserLayerAwareExtender, \
@@ -17,7 +18,7 @@ from vnccollab.content import messageFactory as _
 class KeywordsWidgetModifier(object):
     """Here we assign AutoComplete widget to Subject field"""
 
-    adapts(IBaseContent)
+    adapts(IBaseObject)
     implements(ISchemaModifier, IBrowserLayerAwareExtender)
     
     layer = IPackageLayer
