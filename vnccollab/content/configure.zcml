@@ -30,4 +30,10 @@
 
   <cmf:registerDirectory name="vnccollab_content"/>
 
+  <subscriber
+     for="AccessControl.interfaces.IRoleManager
+          Products.Archetypes.interfaces.IObjectInitializedEvent"
+     handler=".events.turnOffLocalRolesInheritance"
+     />
+
 </configure>
