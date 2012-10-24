@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.5.1 - October 24, 2012
+----------------------
+
+- Update repository url.
+  [Vitaliy Podoba]
+
+
 1.5 - July 13, 2012
 -------------------
 
