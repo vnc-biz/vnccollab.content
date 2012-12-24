@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.5.2 - December, 05, 2012
---------------------------
+1.5.2 - December 24, 2012
+-------------------------
 
 - Adds Products.Ploneboard as dependency.
   [Jose Dinuncio]
