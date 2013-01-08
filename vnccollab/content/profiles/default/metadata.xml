@@ -2,7 +2,6 @@
 <metadata>
   <version>1001</version>
   <dependencies>
-    <dependency>profile-Products.AutocompleteWidget:default</dependency>
     <dependency>profile-raptus.autocompletewidget:default</dependency>
   </dependencies>
 </metadata>

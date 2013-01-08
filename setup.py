@@ -36,8 +36,6 @@ setup(name='vnccollab.content',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'Products.Ploneboard',
-          'Products.AutocompleteWidget',
           'raptus.autocompletewidget',
           # -*- Extra requirements: -*-
       ],
