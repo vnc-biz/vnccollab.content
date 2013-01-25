@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.5.3 - Unreleased
+------------------
+
+- Dump initial profile settings.
+  [Vitaliy Podoba]
+
 1.5.2 - December 24, 2012
 -------------------------
 
