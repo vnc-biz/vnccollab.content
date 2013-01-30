@@ -4,6 +4,9 @@ Changelog
 1.5.3 - Unreleased
 ------------------
 
+- Do not depend on PloneBoard and Products.Autocomplete anymore.
+  [Vitaliy Podoba]
+
 - Dump initial profile settings.
   [Vitaliy Podoba]
 
