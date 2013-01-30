@@ -8,7 +8,7 @@
     
   <five:registerPackage package="." initialize=".initialize" />
 
-  <include package="raptus.autocompletewidget" />
+  <includeDependencies package="." />
 
   <!-- Include the sub-packages that use their own configure.zcml files. -->
   <include package=".browser" />
