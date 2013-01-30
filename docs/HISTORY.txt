@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.5.3 - Unreleased
-------------------
+1.5.3 - January 30, 2013
+------------------------
 
 - Do not depend on PloneBoard and Products.Autocomplete anymore.
   [Vitaliy Podoba]
