@@ -9,7 +9,7 @@ from setuptools import setup, find_packages
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '1.5.3'
+version = '1.5.4'
 
 tests_require = ['zope.testing']
 
@@ -27,7 +27,7 @@ setup(name='vnccollab.content',
         ],
       keywords='plone content type archetypes vnc',
       author='Vitaliy Podoba',
-      author_email='vitaliypodoba@gmail.com',
+      author_email='vitaliy.podoba@vnc.biz',
       url='https://redmine.vnc.biz/redmine/projects/vnc-plone-content',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),

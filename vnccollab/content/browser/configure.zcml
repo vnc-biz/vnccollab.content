@@ -5,6 +5,21 @@
 
   <include package="plone.app.contentmenu" />
 
-  <!-- -*- extra stuff goes here -*- -->
+  <!-- Resource directory for images -->
+  <browser:resourceDirectory
+    name="vnccollab.content.images"
+    directory="images"
+    />
+
+  <browser:resourceDirectory
+    name="vnccollab.content.js"
+    directory="js"
+    />
+
+  <!-- Resource directory for stylesheets -->
+  <browser:resourceDirectory
+    name="vnccollab.content.stylesheets"
+    directory="stylesheets"
+    />
 
 </configure>
