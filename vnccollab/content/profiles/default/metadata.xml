@@ -3,5 +3,6 @@
   <version>1001</version>
   <dependencies>
     <dependency>profile-raptus.autocompletewidget:default</dependency>
+    <dependency>profile-collective.customizablePersonalizeForm:default</dependency>
   </dependencies>
 </metadata>

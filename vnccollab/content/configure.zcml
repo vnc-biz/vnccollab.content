@@ -5,7 +5,8 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     i18n_domain="vnccollab.content">
-    
+
+  <include package="collective.customizablePersonalizeForm" />
   <five:registerPackage package="." initialize=".initialize" />
 
   <includeDependencies package="." />
@@ -16,7 +17,7 @@
   <include package=".portlets" />
   <include package=".extender" />
   <include package=".form" />
-  
+
   <!-- Register the installation GenericSetup extension profile -->
   <genericsetup:registerProfile
       name="default"
@@ -25,8 +26,6 @@
       description="VNC Collaboration Content Types"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
-  
-  <!-- -*- extra stuff goes here -*- -->
 
   <cmf:registerDirectory name="vnccollab_content"/>
 

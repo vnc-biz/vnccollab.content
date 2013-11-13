@@ -33,6 +33,7 @@ setup(name='vnccollab.content',
       install_requires=[
           'setuptools',
           'raptus.autocompletewidget',
+          'collective.customizablePersonalizeForm',
       ],
       extras_require={'test': ['plone.app.testing']},
       entry_points="""
