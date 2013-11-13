@@ -19,6 +19,7 @@
   <include package=".content" />
   <include package=".portlets" />
   <include package=".extender" />
+  <include package=".upgrades" />
   <include package=".form" />
 
   <!-- Register the installation GenericSetup extension profile -->
