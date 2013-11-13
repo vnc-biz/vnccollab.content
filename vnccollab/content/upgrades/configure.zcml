@@ -3,4 +3,16 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="vnccollab.content">
 
+    <genericsetup:upgradeSteps
+      source="1001"
+      destination="1002"
+      sortkey="1"
+      profile="vnccollab.content:default">
+
+        <genericsetup:upgradeDepends
+          title="Run component registry step"
+          import_steps="componentregistry"
+          />
+    </genericsetup:upgradeSteps>
+
 </configure>
