@@ -22,4 +22,51 @@
     directory="stylesheets"
     />
 
+  <!-- Following Functionality -->
+  <browser:page
+      for="*"
+      class=".following.FollowingView"
+      name="user-following"
+      layer=".interfaces.IPackageLayer"
+      attribute="user_following"
+      permission="cmf.SetOwnProperties"
+      />
+
+  <browser:page
+      for="*"
+      class=".following.FollowingView"
+      name="user-followers"
+      layer=".interfaces.IPackageLayer"
+      attribute="user_followers"
+      permission="cmf.SetOwnProperties"
+      />
+
+  <browser:page
+      for="*"
+      class=".following.FollowingView"
+      name="follow_user"
+      layer=".interfaces.IPackageLayer"
+      attribute="follow_user"
+      permission="cmf.SetOwnProperties"
+      />
+
+  <browser:page
+      for="*"
+      class=".following.FollowingView"
+      name="unfollow_user"
+      layer=".interfaces.IPackageLayer"
+      attribute="unfollow_user"
+      permission="cmf.SetOwnProperties"
+      />
+
+  <browser:page
+      for="*"
+      class=".following.FollowingView"
+      name="follow_button"
+      layer=".interfaces.IPackageLayer"
+      attribute="follow_button"
+      permission="cmf.SetOwnProperties"
+      />
+
+
 </configure>
