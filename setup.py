@@ -36,6 +36,7 @@ setup(name='vnccollab.content',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'simplejson',
           'raptus.autocompletewidget',
           # -*- Extra requirements: -*-
       ],
