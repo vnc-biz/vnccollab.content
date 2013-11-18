@@ -2,7 +2,7 @@ import ast
 import json
 import urllib
 
-from vnccollab.theme.tests.base import FunctionalTestCase
+from vnccollab.content.tests.base import FunctionalTestCase
 
 
 class TestFollowingView(FunctionalTestCase):

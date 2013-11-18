@@ -6,8 +6,10 @@ from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import FunctionalTesting
 
+import collective.customizablePersonalizeForm
 
-class AddonContent(PloneSandboxLayer):
+
+class VnccollabContentLayer(PloneSandboxLayer):
 
     defaultBases = (PLONE_FIXTURE,)
 
@@ -23,6 +25,9 @@ class AddonContent(PloneSandboxLayer):
             module = __import__(package, fromlist=[''])
             self.loadZCML(package=module)
 
+        self.loadZCML(package=collective.customizablePersonalizeForm,
+                name='overrides.zcml')
+
         z2.installProduct(app, 'collective.customizablePersonalizeForm')
         z2.installProduct(app, 'vnccollab.content')
 
@@ -31,10 +36,10 @@ class AddonContent(PloneSandboxLayer):
         applyProfile(portal, 'vnccollab.content:default')
 
 
-VNCCOLLAB_CONTENT_FIXTURE = AddonContent()
+VNCCOLLAB_CONTENT_FIXTURE = VnccollabContentLayer()
 VNCCOLLAB_CONTENT_INTEGRATION_TESTING = IntegrationTesting(
     bases=(VNCCOLLAB_CONTENT_FIXTURE,),
-    name='AddonContent:Integration')
+    name='VnccollabContentLayer:Integration')
 VNCCOLLAB_CONTENT_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(VNCCOLLAB_CONTENT_FIXTURE,),
-    name='AddonContent:Functional')
+    name='VnccollabContentLayer:Functional')

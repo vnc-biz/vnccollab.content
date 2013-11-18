@@ -18,6 +18,5 @@ class TestProperties(IntegrationTestCase):
     def test_new_properties_exists(self):
         user_properties = self.personalPrefs().form_fields.\
             __dict__['__FormFields_byname__'].keys()
-        print user_properties
         self.failUnless('telephone' in user_properties)
         self.failUnless('position' in user_properties)

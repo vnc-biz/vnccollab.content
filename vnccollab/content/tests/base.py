@@ -75,3 +75,4 @@ class FunctionalTestCase(BaseTestCase):
     """Base class for functional tests."""
 
     layer = VNCCOLLAB_CONTENT_FUNCTIONAL_TESTING
+
