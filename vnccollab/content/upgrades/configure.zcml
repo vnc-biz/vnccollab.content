@@ -11,7 +11,7 @@
 
         <genericsetup:upgradeDepends
           title="Run component registry and registry step"
-          import_steps="componentregistry registry"
+          import_steps="componentregistry registry memberdata"
           />
     </genericsetup:upgradeSteps>
 

@@ -4,6 +4,5 @@
   <dependencies>
     <dependency>profile-raptus.autocompletewidget:default</dependency>
     <dependency>profile-plone.app.registry:default</dependency>
-    <dependency>profile-collective.customizablePersonalizeForm:default</dependency>
   </dependencies>
 </metadata>
