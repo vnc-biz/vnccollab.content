@@ -4,6 +4,12 @@ Changelog
 1.5.5 - Unreleased
 ------------------
 
+- Adds new author page [8897].
+  [Jose Dinuncio].
+
+- Adds following functionality [8897].
+  [Jose Dinuncio].
+
 - Adds testing infrastructure.
   [Jose Dinuncio]
 
