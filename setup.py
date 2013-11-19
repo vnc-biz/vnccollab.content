@@ -33,6 +33,7 @@ setup(name='vnccollab.content',
       install_requires=[
           'setuptools',
           'five.grok',
+          'plone.api',
           'simplejson',
           'raptus.autocompletewidget',
           'collective.customizablePersonalizeForm',
