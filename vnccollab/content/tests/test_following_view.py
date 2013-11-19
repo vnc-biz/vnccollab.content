@@ -37,7 +37,7 @@ class TestFollowingView(FunctionalTestCase):
 
     def test_follow_user(self):
         browser = self.login('scott@tiger.com', 'secret')
-        browser.open(self.portal_url + '/author/' + 'johan@bach.com')
+        browser.open(self.portal_url + '/@@author?uid=' + 'johan@bach.com')
         self.assertIn(
             '<a class="followLink" title="Follow" data-userid="johan@bach.com" href="#">Follow</a>',
             browser.contents)
@@ -49,7 +49,7 @@ class TestFollowingView(FunctionalTestCase):
         self.assertEqual(data['title'], 'Unfollow')
         self.assertEqual(data['label'], 'Unfollow')
 
-        browser.open(self.portal_url + '/author/' + 'johan@bach.com')
+        browser.open(self.portal_url + '/@@author?uid=' + 'johan@bach.com')
         self.assertIn(
             '<a class="unfollowLink" title="Unfollow" data-userid="johan@bach.com" href="#">Unfollow</a>',
             browser.contents)
@@ -74,7 +74,7 @@ class TestFollowingView(FunctionalTestCase):
 
         browser.open(self.portal_url + '/@@user-following')
         self.assertIn('<ul class="followersList">', browser.contents)
-        self.assertIn('<a class="userImage" href="http://nohost/plone/author/johan@bach.com">', browser.contents)
+        self.assertIn('<a class="userImage" href="http://nohost/plone/@@author?uid=johan@bach.com">', browser.contents)
         self.assertIn('Johann Sebastian Bach', browser.contents)
         self.assertIn('<a class="unfollowLink" title="Unfollow" data-userid="johan@bach.com" href="#">Unfollow</a>', browser.contents)
 
@@ -92,7 +92,7 @@ class TestFollowingView(FunctionalTestCase):
         browser = self.login('johan@bach.com', 'secret')
         browser.open(self.portal_url + '/@@user-followers')
         self.assertIn('<ul class="followersList">', browser.contents)
-        self.assertIn('<a class="userImage" href="http://nohost/plone/author/scott@tiger.com">', browser.contents)
+        self.assertIn('<a class="userImage" href="http://nohost/plone/@@author?uid=scott@tiger.com">', browser.contents)
         self.assertIn('Scott Tiger', browser.contents)
         self.assertIn('<a class="followLink" title="Follow" data-userid="scott@tiger.com" href="#">Follow</a>', browser.contents)
 
@@ -106,7 +106,7 @@ class TestFollowingView(FunctionalTestCase):
         browser = self.login('johan@bach.com', 'secret')
         browser.open(self.portal_url + '/@@user-followers')
         self.assertIn('<ul class="followersList">', browser.contents)
-        self.assertIn('<a class="userImage" href="http://nohost/plone/author/scott@tiger.com">', browser.contents)
+        self.assertIn('<a class="userImage" href="http://nohost/plone/@@author?uid=scott@tiger.com">', browser.contents)
         self.assertIn('Scott Tiger', browser.contents)
         self.assertIn('<a class="unfollowLink" title="Unfollow" data-userid="scott@tiger.com" href="#">Unfollow</a>', browser.contents)
 
@@ -140,7 +140,7 @@ class TestFollowingView(FunctionalTestCase):
 
     def test_unfollow_user(self):
         browser = self.login('scott@tiger.com', 'secret')
-        browser.open(self.portal_url + '/author/' + 'johan@bach.com')
+        browser.open(self.portal_url + '/@@author?uid=' + 'johan@bach.com')
         self.assertIn(
             '<a class="followLink" title="Follow" data-userid="johan@bach.com" href="#">Follow</a>',
             browser.contents)
@@ -152,7 +152,7 @@ class TestFollowingView(FunctionalTestCase):
         self.assertEqual(data['title'], 'Unfollow')
         self.assertEqual(data['label'], 'Unfollow')
 
-        browser.open(self.portal_url + '/author/' + 'johan@bach.com')
+        browser.open(self.portal_url + '/@@author?uid=' + 'johan@bach.com')
         self.assertIn(
             '<a class="unfollowLink" title="Unfollow" data-userid="johan@bach.com" href="#">Unfollow</a>',
             browser.contents)
@@ -160,7 +160,7 @@ class TestFollowingView(FunctionalTestCase):
         data = {'user1': '', 'user2': 'johan@bach.com'}
         browser.open(self.portal_url + '/@@unfollow_user', urllib.urlencode(data))
 
-        browser.open(self.portal_url + '/author/' + 'johan@bach.com')
+        browser.open(self.portal_url + '/@@author?uid=' + 'johan@bach.com')
         self.assertIn(
             '<a class="followLink" title="Follow" data-userid="johan@bach.com" href="#">Follow</a>',
             browser.contents)
