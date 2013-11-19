@@ -22,6 +22,15 @@
     directory="stylesheets"
     />
 
+  <browser:page
+      for="*"
+      class=".author.AuthorView"
+      name="author"
+      layer=".interfaces.IPackageLayer"
+      template="templates/author.pt"
+      permission="zope2.View"
+      />
+
   <!-- Following Functionality -->
   <browser:page
       for="*"
