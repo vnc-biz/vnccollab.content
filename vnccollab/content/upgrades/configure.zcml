@@ -10,8 +10,8 @@
       profile="vnccollab.content:default">
 
         <genericsetup:upgradeDepends
-          title="Run component registry step"
-          import_steps="componentregistry"
+          title="Run component registry and registry step"
+          import_steps="componentregistry registry"
           />
     </genericsetup:upgradeSteps>
 
