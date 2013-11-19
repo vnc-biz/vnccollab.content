@@ -37,8 +37,10 @@ class IUserDataSchema(Interface):
 
     position = schema.TextLine(
         title=_("Company Position"),
+        description=_("Position in the company"),
         required=False)
 
     telephone = schema.TextLine(
         title=_("Telephone Number"),
+        description=_("Personal Phone Number"),
         required=False)
