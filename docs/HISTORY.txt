@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.5.5 - November 20, 2013
+-------------------------
+
+- Adds missing dependency (simplejson)
+  [Jose Dinuncio]
+
 1.5.4 - October 24, 2013
 ------------------------
 
