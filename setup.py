@@ -9,7 +9,7 @@ from setuptools import setup, find_packages
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '1.5.4'
+version = '1.5.5'
 
 tests_require = ['zope.testing']
 
@@ -36,6 +36,7 @@ setup(name='vnccollab.content',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'simplejson',
           'raptus.autocompletewidget',
           # -*- Extra requirements: -*-
       ],
