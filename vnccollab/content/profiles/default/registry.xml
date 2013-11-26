@@ -10,7 +10,6 @@
         <value purge="false">
             <element>Following::@@user-following?userid={%uid}</element>
             <element>Followers::@@user-following?userid={%uid}</element>
-            <element>Casts::@@user-cast?userid={%uid}</element>
         </value>
     </record>
 </registry>
