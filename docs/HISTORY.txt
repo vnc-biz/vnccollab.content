@@ -4,6 +4,9 @@ Changelog
 1.5.5 - Unreleased
 ------------------
 
+- Adds follow js code. Adds ajax to new author page. Adds vanilla style [8898].
+  [Cesar Gonzalez]
+
 - Adds new author page [8897].
   [Jose Dinuncio].
 
@@ -18,7 +21,7 @@ Changelog
 
 - Fixes license and adds AUTHORS.txt.
   [Jose Dinuncio]
-  
+
   1.5.3 - January 30, 2013
 ------------------------
 

@@ -11,6 +11,7 @@
     directory="images"
     />
 
+  <!-- Resource directory for javascripts -->
   <browser:resourceDirectory
     name="vnccollab.content.js"
     directory="js"
@@ -18,8 +19,8 @@
 
   <!-- Resource directory for stylesheets -->
   <browser:resourceDirectory
-    name="vnccollab.content.stylesheets"
-    directory="stylesheets"
+    name="vnccollab.content.css"
+    directory="css"
     />
 
   <browser:page

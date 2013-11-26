@@ -1,0 +1,58 @@
+/* Stylesheet for the 'VNC Content package' */
+
+
+.template-author .authorPageActions {
+    list-style-type: none !important;
+}
+.template-author .followLink, .unfollowLink {
+    float: right;
+}
+.template-author .author-details {
+    min-height: 150px;
+}
+
+.template-author .formPanel {
+    padding: 1em;
+}
+
+.template-author #userprofile-spinner {
+    width: 100%;
+    text-align: center;
+    margin-top: 4em;
+    position: absolute;
+    display: none;
+}
+
+.template-author #content .author-details p {
+    margin-bottom: 0.5em;
+}
+.template-author #content .author-details {
+    margin-left: 120px;
+}
+
+.template-author #content .userImage {
+    border:none;
+}
+.template-author #content .userImage img {
+    width: 40px;
+    height: 40px;
+}
+.template-author #content .followersList {
+    list-style-type: none;
+    margin-left: 1em;
+}
+.template-author #content .followersList li {
+    display: inline-block;
+    width: 220px;
+    margin: 0 7px 5px 0;
+    vertical-align: top;
+}
+.template-author #content .userDetails {
+    display: inline-block;
+    vertical-align: top;
+}
+.template-author #content .followButtonWrapper .unfollowLink,
+.template-author #content .followButtonWrapper .followLink  {
+    float: none;
+    margin-left: 44px;
+}

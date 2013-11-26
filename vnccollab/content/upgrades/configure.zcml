@@ -11,7 +11,19 @@
 
         <genericsetup:upgradeDepends
           title="Run component registry and registry step"
-          import_steps="componentregistry registry memberdata"
+          import_steps="componentregistry memberdata"
+          />
+    </genericsetup:upgradeSteps>
+
+    <genericsetup:upgradeSteps
+      source="1002"
+      destination="1003"
+      sortkey="2"
+      profile="vnccollab.content:default">
+
+        <genericsetup:upgradeDepends
+          title="Adds js and css for user profile tabs"
+          import_steps="jsregistry cssregistry"
           />
     </genericsetup:upgradeSteps>
 
