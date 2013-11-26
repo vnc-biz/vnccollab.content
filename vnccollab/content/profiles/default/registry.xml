@@ -9,7 +9,7 @@
         </field>
         <value purge="false">
             <element>Following::@@user-following?userid={%uid}</element>
-            <element>Followers::@@user-following?userid={%uid}</element>
+            <element>Followers::@@user-followers?userid={%uid}</element>
         </value>
     </record>
 </registry>
