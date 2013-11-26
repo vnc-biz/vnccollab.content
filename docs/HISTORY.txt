@@ -4,6 +4,9 @@ Changelog
 1.5.5 - Unreleased
 ------------------
 
+- Adds dynamyc menu for dynamic tabs of new user profile [8898].
+  [Cesar Gonzalez]
+
 - Adds follow js code. Adds ajax to new author page. Adds vanilla style [8898].
   [Cesar Gonzalez]
 

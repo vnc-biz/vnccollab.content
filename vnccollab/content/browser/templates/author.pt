@@ -170,26 +170,17 @@
                       <li class="formTab firstFormTab">
                         <a href="#" class="selected" data-page-tab="page1"><span>User's Content</span></a>
                       </li>
-                      <li class="formTab">
-                        <a href="#" title="User Followings" data-page-tab="page2"
-                            tal:attributes="href string:${portal_url}/@@user-following?userid=${author}">Follows</a>
-                      </li>
-                      <li class="formTab">
-                        <a href="#" title="User Followers" data-page-tab="page3"
-                            tal:attributes="href string:${portal_url}/@@user-followers?userid=${author}">Followers</a>
-                      </li>
-                      <li class="formTab">
-                        <a href="#" title="User Cast" data-page-tab="page4"
-                            tal:attributes="href string:${portal_url}/@@user-cast?userid=${author}">User Cast</a>
-                      </li>
-                      <!-- <li tal:repeat="tab view/tabs_info" class="formTab">
+                      <li tal:repeat="tab view/tabs_info" class="formTab">
                         <tal:vars define="title python:tab[0];
-                                          url   python:tab[1]">
+                                          url   python:tab[1];
+                                          page  python:repeat['tab'].index + 2">
                           <a href="#" title=""
-                            tal:attributes="href string:${url}; title string:${title}"
+                            tal:attributes="href string:${url};
+                                            title string:${title};
+                                            data-page-tab string:page${page}"
                             tal:content="title">Title</a>
                         </tal:vars>
-                      </li> -->
+                      </li>
                       <li class="formTab" tal:condition="not: isOwner">
                         <a href="#"  data-page-tab="page5">Send Message</a>
                       </li>
@@ -240,13 +231,11 @@
                           </p>
                         </tal:authorContent>
                       </div>
-                      <!-- Follow [dynamic]-->
+                      <!-- Dynamic tab pages [dynamic]-->
                       <div class="formPanel page2" style="display: none;">
                       </div>
-                      <!-- Followers [dynamic]-->
                       <div class="formPanel page3" style="display: none;">
                       </div>
-                      <!-- User Cast [dybamic]-->
                       <div class="formPanel page4" style="display: none;">
                       </div>
                       <!-- Send Message [static]-->
