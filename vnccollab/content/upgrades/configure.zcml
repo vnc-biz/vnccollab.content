@@ -1,0 +1,30 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="vnccollab.content">
+
+    <genericsetup:upgradeSteps
+      source="1001"
+      destination="1002"
+      sortkey="1"
+      profile="vnccollab.content:default">
+
+        <genericsetup:upgradeDepends
+          title="Run component registry and registry step"
+          import_steps="componentregistry memberdata"
+          />
+    </genericsetup:upgradeSteps>
+
+    <genericsetup:upgradeSteps
+      source="1002"
+      destination="1003"
+      sortkey="2"
+      profile="vnccollab.content:default">
+
+        <genericsetup:upgradeDepends
+          title="Adds js and css for user profile tabs"
+          import_steps="jsregistry cssregistry"
+          />
+    </genericsetup:upgradeSteps>
+
+</configure>
