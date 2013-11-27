@@ -40,11 +40,11 @@ class AuthorView(BrowserView):
 
         tabs = []
         for line in info:
-            title, path = (line.split('::') + ['', ''])[:2]
+            title, path, mode = (line.split('::') + ['', '', ''])[:3]
             if not title or not path:
                 continue
             path = path.replace('{%uid}', uid)
             url = '{0}/{1}'.format(base_url, path)
-            tabs.append((_(title), url))
+            tabs.append((_(title), url, mode))
 
         return tabs

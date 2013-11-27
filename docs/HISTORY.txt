@@ -4,6 +4,9 @@ Changelog
 1.5.6 - Unreleased
 ------------------
 
+- Adds mode parameter to registry for load dynamic tab [8898].
+  [Cesar Gonzalez]
+
 - Adds dynamyc menu for dynamic tabs of new user profile [8898].
   [Cesar Gonzalez]
 
