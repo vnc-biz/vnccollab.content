@@ -1,6 +1,29 @@
 Changelog
 =========
 
+1.5.6 - Unreleased
+------------------
+
+- Fixes loading spinner functionality of new user profile [8898].
+  [Cesar Gonzalez]
+
+- Adds mode parameter to registry for load dynamic tab [8898].
+  [Cesar Gonzalez]
+
+- Adds dynamyc menu for dynamic tabs of new user profile [8898].
+  [Cesar Gonzalez]
+
+- Adds follow js code. Adds ajax to new author page. Adds vanilla style [8898].
+  [Cesar Gonzalez]
+
+- Adds new author page [8897].
+  [Jose Dinuncio].
+
+- Adds following functionality [8897].
+  [Jose Dinuncio].
+
+- Adds testing infrastructure.
+
 1.5.5 - November 20, 2013
 -------------------------
 
@@ -12,7 +35,7 @@ Changelog
 
 - Fixes license and adds AUTHORS.txt.
   [Jose Dinuncio]
-  
+
   1.5.3 - January 30, 2013
 ------------------------
 
