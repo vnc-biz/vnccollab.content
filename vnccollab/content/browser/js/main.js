@@ -69,12 +69,15 @@ var vnc_collab_content = (function () {
       jq('#userprofile-tabmenu a').removeClass('selected');
       jq(this).addClass('selected');
 
-      // show/hide tab panel
+      // hide all tabs panel
       jq('.formPanel').hide();
 
       // if dynamic content then load it
       if ( href  != '#') {
          var content = '';
+
+         // show the clean page
+         $page.empty().show();
 
         // start spinner
         jq('#userprofile-spinner').show();
@@ -91,9 +94,8 @@ var vnc_collab_content = (function () {
         } else {
           content = loadTab(href);
         }
-
         // Append content to tab
-        $page.empty().append(content).show();
+        $page.append(content);
       } else {
         $page.show();
       }
@@ -101,6 +103,8 @@ var vnc_collab_content = (function () {
       // load content tab by ajax
       function loadTab(url) {
           var content = '';
+
+          jq('#userprofile-spinner').show();
 
           jq.ajax({
             type: 'GET',

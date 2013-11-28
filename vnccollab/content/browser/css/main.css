@@ -13,6 +13,7 @@
 
 .template-author .formPanel {
     padding: 1em;
+    min-height: 85px;
 }
 
 .template-author #userprofile-spinner {
