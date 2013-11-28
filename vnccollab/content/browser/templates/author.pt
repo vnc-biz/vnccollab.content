@@ -30,7 +30,7 @@
                                 isAnon context/@@plone_portal_state/anonymous;
                                 raiseUnauthorized python:(not isAnon or allowAnonymousViewAbout) or here.raiseUnauthorized();
                                 url_unquote_plus python:modules['Products.PythonScripts.standard'].url_unquote_plus;
-                                author request/uid;
+                                author request/uid|view/uid;
                                 mtool python:context.portal_membership;
                                 portrait python: mtool.getPersonalPortrait(author);
                                 portal_types context/portal_types;
@@ -280,7 +280,7 @@
                                 <form name="feedback_form"
                                       action=""
                                       method="post"
-                                      tal:attributes="action string:$here_url/${template/getId}">
+                                      tal:attributes="action string:$here_url/send_feedback">
 
                                 <fieldset>
 
