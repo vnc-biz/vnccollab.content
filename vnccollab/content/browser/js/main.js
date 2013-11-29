@@ -115,45 +115,8 @@ var vnc_collab_content = (function () {
             }
           });
         }
-
       } else {
         $page.show();
-      }
-
-      // load content tab by ajax
-      function loadTab(url) {
-          var content = '';
-
-          jq('#userprofile-spinner').show();
-
-          jq.ajax({
-            type: 'GET',
-            url: url,
-            dataType: 'html',
-            async: true,
-            cache: false,
-            success: function( data, status, xhr ){
-              var $content = jq(data).find('#content');
-
-
-              jq('#userprofile-spinner').hide();
-
-              // remove unneccesary content
-              $content.find('.backLink').remove();
-              $content.find('h1').remove();
-
-
-
-              return $content;
-            },
-            error: function(){
-              jq('#userprofile-spinner').hide();
-              content = '';
-              return content;
-            }
-          });
-
-
       }
     });
   }

@@ -4,6 +4,9 @@ Changelog
 1.5.6 - Unreleased
 ------------------
 
+- Remove unused function.
+  [Cesar Gonzalez]
+
 - Change to async ajax for load content of new user profile [8898].
   [Cesar Gonzalez]
 
