@@ -74,8 +74,6 @@ var vnc_collab_content = (function () {
 
       // if dynamic content then load it
       if ( href  != '#') {
-         var content = '';
-
          // show the clean page
          $page.empty().show();
 
@@ -84,58 +82,41 @@ var vnc_collab_content = (function () {
 
         // If want to load by iframe
         if (mode == 'iframe') {
-          content = '<iframe src="' + href + '" width="100%" height="750px" align="center"></iframe>';
+          var content = '<iframe src="' + href + '" width="100%" height="750px" align="center"></iframe>';
 
           // hide unnecessary content
           jq('#userprofile-tabcontents').find('iframe').contents().find('#edit-bar').hide();
           jq('#userprofile-tabcontents').find('iframe').contents().find('#portal-header').hide();
           jq('#userprofile-tabcontents').find('iframe').contents().find('#portal-footer').hide();
           jq('#userprofile-spinner').hide();
+          // Append content to tab
+          $page.append(content);
+
         } else {
-          content = loadTab(href);
-        }
-        // Append content to tab
-        $page.append(content);
-      } else {
-        $page.show();
-      }
-
-      // load content tab by ajax
-      function loadTab(url) {
-          var content = '';
-
-          jq('#userprofile-spinner').show();
-
+          // If have href then load by ajax
           jq.ajax({
             type: 'GET',
-            url: url,
+            url: href,
             dataType: 'html',
-            async: false,
+            async: true,
             cache: false,
-            success: function( data ){
+            success: function( data, status, xhr ){
               var $content = jq(data).find('#content');
-              var $script =  jq(data).find('script[type="text/javascript"]');
-
-              $script.each(function(i) {
-                    eval(jq(this).text());
-              });
-
-              jq('#userprofile-spinner').hide();
 
               // remove unneccesary content
               $content.find('.backLink').remove();
               $content.find('h1').remove();
-
-
-
-              content = $content.html();
+              // Append content to tab
+              $page.append($content);
+              jq('#userprofile-spinner').hide();
             },
             error: function(){
               jq('#userprofile-spinner').hide();
-              content = '';
             }
           });
-          return content;
+        }
+      } else {
+        $page.show();
       }
     });
   }
