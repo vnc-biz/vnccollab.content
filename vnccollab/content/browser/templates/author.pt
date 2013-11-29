@@ -30,7 +30,7 @@
                                 isAnon context/@@plone_portal_state/anonymous;
                                 raiseUnauthorized python:(not isAnon or allowAnonymousViewAbout) or here.raiseUnauthorized();
                                 url_unquote_plus python:modules['Products.PythonScripts.standard'].url_unquote_plus;
-                                author request/uid;
+                                author request/uid|view/uid;
                                 mtool python:context.portal_membership;
                                 portrait python: mtool.getPersonalPortrait(author);
                                 portal_types context/portal_types;
@@ -168,30 +168,23 @@
                     <!-- User profile tab menu -->
                     <ul class="formTabs" id="userprofile-tabmenu">
                       <li class="formTab firstFormTab">
-                        <a href="#" class="selected" data-page-tab="page1"><span>User's Content</span></a>
+                        <a href="#" class="selected" data-page-tab="static1"><span>User's Content</span></a>
                       </li>
-                      <li class="formTab">
-                        <a href="#" title="User Followings" data-page-tab="page2"
-                            tal:attributes="href string:${portal_url}/@@user-following?userid=${author}">Follows</a>
-                      </li>
-                      <li class="formTab">
-                        <a href="#" title="User Followers" data-page-tab="page3"
-                            tal:attributes="href string:${portal_url}/@@user-followers?userid=${author}">Followers</a>
-                      </li>
-                      <li class="formTab">
-                        <a href="#" title="User Cast" data-page-tab="page4"
-                            tal:attributes="href string:${portal_url}/@@user-cast?userid=${author}">User Cast</a>
-                      </li>
-                      <!-- <li tal:repeat="tab view/tabs_info" class="formTab">
+                      <li tal:repeat="tab view/tabs_info" class="formTab">
                         <tal:vars define="title python:tab[0];
-                                          url   python:tab[1]">
-                          <a href="#" title=""
-                            tal:attributes="href string:${url}; title string:${title}"
+                                          url   python:tab[1];
+                                          mode  python:tab[2]">
+                          <a href="#"
+                            title=""
+                            data-page-tab="dynamic"
+                            tal:attributes="href string:${url};
+                                            title string:${title};
+                                            data-page-mode string:${mode}"
                             tal:content="title">Title</a>
                         </tal:vars>
-                      </li> -->
+                      </li>
                       <li class="formTab" tal:condition="not: isOwner">
-                        <a href="#"  data-page-tab="page5">Send Message</a>
+                        <a href="#"  data-page-tab="static2">Send Message</a>
                       </li>
                     </ul>
 
@@ -202,7 +195,7 @@
                       </div>
 
                       <!-- User's Content [static]-->
-                      <div class="formPanel page1">
+                      <div class="formPanel static1">
                         <tal:authorContent define="author_content python:context.portal_catalog.searchResults(dict(Creator=author, sort_on='created', sort_order='reverse'))[:10];"
                                        condition="author_content">
 
@@ -240,17 +233,11 @@
                           </p>
                         </tal:authorContent>
                       </div>
-                      <!-- Follow [dynamic]-->
-                      <div class="formPanel page2" style="display: none;">
-                      </div>
-                      <!-- Followers [dynamic]-->
-                      <div class="formPanel page3" style="display: none;">
-                      </div>
-                      <!-- User Cast [dybamic]-->
-                      <div class="formPanel page4" style="display: none;">
+                      <!-- Dynamic tab pages [dynamic]-->
+                      <div class="formPanel dynamic" style="display: none;">
                       </div>
                       <!-- Send Message [static]-->
-                      <div class="formPanel page5" style="display: none;">
+                      <div class="formPanel static2" style="display: none;">
                         <tal:noemailsetup tal:condition="python:not (email_from_address or isAnon)">
                             <p class="discreet"
                                i18n:translate="text_no_email_setup">
@@ -293,7 +280,7 @@
                                 <form name="feedback_form"
                                       action=""
                                       method="post"
-                                      tal:attributes="action string:$here_url/${template/getId}">
+                                      tal:attributes="action string:$here_url/send_feedback">
 
                                 <fieldset>
 
@@ -361,45 +348,7 @@
 
                 </div>
 
-                <!-- Dynamic tabs -->
-               <!--  <ul>
-                  <li tal:repeat="tab view/tabs_info">
-                    <tal:vars define="title python:tab[0];
-                                      url   python:tab[1]">
-                      <span tal:replace="title"></span>
-                      <span tal:replace="url"></span>
-                    </tal:vars>
-                  </li>
-                </ul> -->
-
-                <!-- <ul class="authorPageActions"
-                    tal:define="bview nocall:context/@@follow_button;
-                                follow_button python:bview(author, None)">
-                  <li tal:condition="follow_button">
-                    <a class="followLink unfollowLink" title="Unfollow"
-                       data-userid=""
-                       tal:attributes="data-userid author;
-                                       title follow_button/title;
-                                       class python:follow_button['following'] and 'unfollowLink' or 'followLink';"
-                       tal:content="follow_button/label"
-                       href="#">Following</a>
-                  </li>
-                 <li>
-                    <a class="followingLink" href="#" title="User Followings"
-                       tal:attributes="href string:${portal_url}/@@user-following?userid=${author}">Following</a>
-                  </li>
-                  <li>
-                    <a class="followersLink" href="#" title="User Followers"
-                       tal:attributes="href string:${portal_url}/@@user-followers?userid=${author}">Followers</a>
-                  </li>
-                  <li>
-                    <a class="userCastLink" href="#" title="User Cast"
-                       tal:attributes="href string:${portal_url}/@@user-cast?userid=${author}">User Cast</a>
-                  </li>
-                </ul>-->
             </div>
-
-
 
         </tal:haveAuthor>
 

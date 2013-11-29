@@ -9,7 +9,7 @@ var vnc_collab_content = (function () {
 
   function initFollowingControls() {
     // attach hover actions
-    jq('a.followLink,a.unfollowLink').mouseover(function(event){
+    jq('a.followLink, a.unfollowLink').mouseover(function(event){
       var link = $(event.target);
       link.data('orig_label', link.text()).text(link.attr('title'));
     }).mouseout(function(event){
@@ -20,7 +20,7 @@ var vnc_collab_content = (function () {
     });
 
     // attach click handlers to Follow/Unfollow buttons
-    jq('a.followLink,a.unfollowLink').click(function(event){
+    jq('body').on('click', 'a.followLink, a.unfollowLink', function(event){
        event.preventDefault();
        event.stopPropagation();
        var link = $(event.target),
@@ -60,54 +60,63 @@ var vnc_collab_content = (function () {
     jq('#userprofile-tabmenu').on('click', 'a', function(event) {
       event.preventDefault();
 
-      var page =  '.' + jq(this).data('pageTab');
+      var pageClass =  '.' + jq(this).data('pageTab');
+      var $page = jq('#userprofile-tabcontents').find(pageClass);
+      var mode = jq(this).data('pageMode');
       var href = jq(this).attr('href');
 
       // select/unselect tab menu option
       jq('#userprofile-tabmenu a').removeClass('selected');
       jq(this).addClass('selected');
 
-      // show/hide tab panel
+      // hide all tabs panel
       jq('.formPanel').hide();
-      jq('#userprofile-tabcontents').find(page).show();
 
       // if dynamic content then load it
       if ( href  != '#') {
+         // show the clean page
+         $page.empty().show();
+
         // start spinner
         jq('#userprofile-spinner').show();
 
-        var content = loadTab(href);
-        jq('#userprofile-tabcontents').find(page).empty().append(content);
+        // If want to load by iframe
+        if (mode == 'iframe') {
+          var content = '<iframe src="' + href + '" width="100%" height="750px" align="center"></iframe>';
 
-      }
+          // hide unnecessary content
+          jq('#userprofile-tabcontents').find('iframe').contents().find('#edit-bar').hide();
+          jq('#userprofile-tabcontents').find('iframe').contents().find('#portal-header').hide();
+          jq('#userprofile-tabcontents').find('iframe').contents().find('#portal-footer').hide();
+          jq('#userprofile-spinner').hide();
+          // Append content to tab
+          $page.append(content);
 
-      // load content tab by ajax
-      function loadTab(url) {
-          var content = '';
-
+        } else {
+          // If have href then load by ajax
           jq.ajax({
             type: 'GET',
-            url: url,
+            url: href,
             dataType: 'html',
-            async: false,
+            async: true,
             cache: false,
-            success: function( data ){
+            success: function( data, status, xhr ){
               var $content = jq(data).find('#content');
-
-              jq('#userprofile-spinner').hide();
 
               // remove unneccesary content
               $content.find('.backLink').remove();
               $content.find('h1').remove();
-
-              content = $content.html();
+              // Append content to tab
+              $page.append($content);
+              jq('#userprofile-spinner').hide();
             },
             error: function(){
               jq('#userprofile-spinner').hide();
-              content = '';
             }
           });
-          return content;
+        }
+      } else {
+        $page.show();
       }
     });
   }
