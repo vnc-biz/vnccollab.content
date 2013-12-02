@@ -278,6 +278,7 @@
                                 </p>
 
                                 <form name="feedback_form"
+                                      id="feedback_form"
                                       action=""
                                       method="post"
                                       tal:attributes="action string:$here_url/send_feedback">
@@ -326,6 +327,7 @@
                                 <div class="formControls">
 
                                     <input class="context"
+                                           id="feedback_form_submit"
                                            type="submit"
                                            name="form.button.Send"
                                            value="Send"

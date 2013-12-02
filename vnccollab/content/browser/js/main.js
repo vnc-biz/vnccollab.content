@@ -121,10 +121,34 @@ var vnc_collab_content = (function () {
     });
   }
 
+  //
+  //  Init send form in author page
+  //
+
+  function initSendHandler() {
+    var $subject = jq('#subject');
+    var $message = jq('#message');
+    var $feedback_submit = jq('#feedback_form_submit')
+
+    function handleSendButton() {
+      if ($subject.val() && $message.val()) {
+        $feedback_submit.removeAttr('disabled');
+      } else {
+        $feedback_submit.attr('disabled', 'disabled');
+      }
+    }
+
+    $subject.bind('input', handleSendButton);
+    $message.bind('input', handleSendButton);
+    handleSendButton();
+
+  }
+
   // public interface
   return {
         initFollowingControls: initFollowingControls,
-        initUserProfileTabHandler: initUserProfileTabHandler
+        initUserProfileTabHandler: initUserProfileTabHandler,
+        initSendHandler: initSendHandler
   };
 }) ();
 
@@ -133,5 +157,6 @@ var vnc_collab_content = (function () {
 jq(function() {
   var me = vnc_collab_content;
   me.initFollowingControls();
+  me.initSendHandler();
   me.initUserProfileTabHandler();
 });
