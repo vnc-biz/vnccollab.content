@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <metadata>
-  <version>1001</version>
+  <version>1003</version>
   <dependencies>
     <dependency>profile-raptus.autocompletewidget:default</dependency>
+    <dependency>profile-plone.app.registry:default</dependency>
   </dependencies>
 </metadata>
