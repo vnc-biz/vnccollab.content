@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.5.7 - unreleased
-------------------------
+1.5.7 - March 07, 2014
+----------------------
 
 - Adds version.txt.
   [Jose Dinuncio]
