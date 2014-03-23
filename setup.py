@@ -14,7 +14,7 @@ version = open('version.txt').read()
 setup(name='vnccollab.content',
       version=version,
       description="VNC Collaboration Content Types",
-      long_description=open("README.txt").read() + "\n" +
+      long_description=open(os.path.join("docs", "README.txt")).read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       classifiers=[
           'Framework :: Plone',
