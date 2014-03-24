@@ -4,6 +4,9 @@ Changelog
 1.5.7 - unreleased
 ------------------------
 
+- Add german translations [10519].
+  [Marcin Staniszczak]
+
 - Adds version.txt.
   [Jose Dinuncio]
     
