@@ -1,0 +1,3 @@
+#: ./browser/templates/author.pt:171
+msgid "User's Content"
+msgstr "Inhalte des Nutzers"
