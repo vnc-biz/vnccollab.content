@@ -1,0 +1,148 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2014-03-24 18:19+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: vnccollab.content\n"
+
+#: ./browser/templates/author.pt:163
+msgid "Author's home page in this site"
+msgstr ""
+
+#: ./userdataschema.py:39
+msgid "Company Position"
+msgstr ""
+
+#: ./browser/templates/author.pt:144
+msgid "E-mail"
+msgstr ""
+
+#: ./browser/templates/author.pt:47
+msgid "Error"
+msgstr ""
+
+msgid "Followers"
+msgstr ""
+
+msgid "Following"
+msgstr ""
+
+#: ./browser/templates/author.pt:139
+msgid "Language:"
+msgstr ""
+
+#: ./browser/templates/author.pt:129
+msgid "Location"
+msgstr ""
+
+#: ./userdataschema.py:45
+msgid "Personal Phone Number"
+msgstr ""
+
+#: ./userdataschema.py:40
+msgid "Position in the company"
+msgstr ""
+
+#: ./userdataschema.py:44
+msgid "Telephone Number"
+msgstr ""
+
+msgid "User Cast"
+msgstr ""
+
+#: ./browser/templates/author.pt:171
+msgid "User's Content"
+msgstr ""
+
+#. Default: "If you want to contact this author, fill in the form below."
+#: ./browser/templates/author.pt:274
+msgid "description_author_feedback"
+msgstr ""
+
+#. Default: "All content created by ${user}…"
+#: ./browser/templates/author.pt:231
+msgid "go_to_search_author_content"
+msgstr ""
+
+#. Default: "x …"
+#: ./browser/templates/author.pt:163
+msgid "label_author_internal_home_page"
+msgstr ""
+
+#. Default: "Edit"
+#: ./browser/templates/author.pt:76
+msgid "label_edit"
+msgstr ""
+
+#. Default: "Log in to send feedback"
+#: ./browser/templates/author.pt:264
+msgid "label_login_to_send_feedback"
+msgstr ""
+
+#. Default: "Message"
+#: ./browser/templates/author.pt:311
+msgid "label_message"
+msgstr ""
+
+#. Default: "(Required)"
+#: ./browser/templates/author.pt:296
+msgid "label_required"
+msgstr ""
+
+#. Default: "Send"
+#: ./browser/templates/author.pt:329
+msgid "label_send"
+msgstr ""
+
+#. Default: "Subject"
+#: ./browser/templates/author.pt:292
+msgid "label_subject"
+msgstr ""
+
+#. Default: "View"
+#: ./browser/templates/author.pt:69
+msgid "label_view"
+msgstr ""
+
+#. Default: "Feedback for author"
+#: ./browser/templates/author.pt:288
+msgid "legend_feedback_for_author"
+msgstr ""
+
+#. Default: "Lists content written by an author grouped by content type"
+#: ./browser/templates/author.pt:207
+msgid "summary_author_content_list"
+msgstr ""
+
+#. Default: "This site doesn't have a valid email setup, so you cannot use any contact forms."
+#: ./browser/templates/author.pt:242
+msgid "text_no_email_setup"
+msgstr ""
+
+#. Default: "You do not have an email address, so you cannot use any contact forms. Please edit your personal information."
+#: ./browser/templates/author.pt:250
+msgid "text_no_member_email"
+msgstr ""
+
+#. Default: "No user by that name."
+#: ./browser/templates/author.pt:50
+msgid "text_no_user_by_name"
+msgstr ""
+
+#. Default: "Required"
+#: ./browser/templates/author.pt:296
+msgid "title_required"
+msgstr ""
+

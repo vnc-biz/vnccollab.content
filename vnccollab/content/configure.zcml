@@ -20,6 +20,7 @@
   <include package=".extender" />
   <include package=".upgrades" />
   <include package=".form" />
+  <i18n:registerTranslations directory="locales" />
 
   <!-- Register the installation GenericSetup extension profile -->
   <genericsetup:registerProfile
