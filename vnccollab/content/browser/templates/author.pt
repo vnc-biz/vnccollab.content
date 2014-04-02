@@ -111,7 +111,7 @@
                                        title follow_button/title;
                                        class python:follow_button['following'] and 'unfollowLink' or 'followLink';"
                        tal:content="follow_button/label"
-                       href="#">Following</a>
+                       href="#" i18n:translate="">Following</a>
                   </li>
                 </ul>
 
@@ -126,7 +126,7 @@
                     <!-- User info details -->
                     <div class="author-details">
                       <p tal:condition="authorinfo/location">
-                        Location:
+                        <tal:i18n i18n:translate="">Location</tal:i18n>:
                         <span tal:content="authorinfo/location">Location</span>
                       </p>
 
@@ -136,12 +136,12 @@
                       </p>
 
                       <p tal:condition="python:'language' in authorinfo and authorinfo['language']">
-                        Language:
+                        <tal:i18n i18n:translate="">Language:</tal:i18n>
                         <span tal:content="authorinfo/language">Language</span>
                       </p>
 
                       <p tal:condition="python:authormember.getProperty('email', '')">
-                        E-mail:
+                        <tal:i18n i18n:translate="">E-mail</tal:i18n>:
                         <span tal:content="python:authormember.getProperty('email')">Email</span>
                       </p>
 
@@ -160,15 +160,15 @@
                          tal:condition="python:mtool.getHomeFolder(id=author)">
                         <a href="#"
                            tal:attributes="href python:mtool.getHomeFolder(id=author).absolute_url()"
-                           i18n:translate="label_author_internal_home_page">Author's
-                          home page in this site&hellip;</a>
+                           i18n:translate="label_author_internal_home_page"><tal:i18n i18n:translate="">Author's
+                          home page in this site</tal:i18n> &hellip;</a>
                       </p>
                     </div>
 
                     <!-- User profile tab menu -->
                     <ul class="formTabs" id="userprofile-tabmenu">
                       <li class="formTab firstFormTab">
-                        <a href="#" class="selected" data-page-tab="static1"><span>User's Content</span></a>
+                        <a href="#" class="selected" data-page-tab="static1"><span><tal:i18n i18n:translate="">User's Content</tal:i18n></span></a>
                       </li>
                       <li tal:repeat="tab view/tabs_info" class="formTab">
                         <tal:vars define="title python:tab[0];

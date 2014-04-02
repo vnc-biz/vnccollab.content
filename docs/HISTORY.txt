@@ -1,8 +1,23 @@
 Changelog
 =========
 
-1.5.6 - Unreleased
-------------------
+1.5.8 - April 02, 2014
+----------------------
+
+- Improves translation and docs.
+  [Marcin Staniszczak]
+
+1.5.7 - March 07, 2014
+----------------------
+
+- Add german translations [10519].
+  [Marcin Staniszczak]
+
+- Adds version.txt.
+  [Jose Dinuncio]
+    
+1.5.6 - December 06, 2013
+-------------------------
 
 - Remove unused function.
   [Cesar Gonzalez]
