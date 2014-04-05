@@ -1,0 +1,64 @@
+
+    <html>
+      <head><title>Test coverage for vnccollab.content.extender.keywords</title>
+      <style type="text/css">
+        a {text-decoration: none; display: block; padding-right: 1em;}
+        a:hover {background: #EFA;}
+        hr {height: 1px; border: none; border-top: 1px solid gray;}
+        .notcovered {background: #FCC;}
+        .footer {margin: 2em; font-size: small; color: gray;}
+      </style>
+      </head>
+      <body><h1>Test coverage for vnccollab.content.extender.keywords</h1>
+      <table>
+    
+<tr><td><a href="vnccollab.html">vnccollab/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 92% (31 of 409 uncovered)</td></tr>
+<tr><td><a href="vnccollab.content.html">&nbsp;&nbsp;&nbsp;&nbsp;content/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 92% (31 of 409 uncovered)</td></tr>
+<tr><td><a href="vnccollab.content.extender.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extender/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 95% (1 of 23 uncovered)</td></tr>
+<tr><td><a href="vnccollab.content.extender.keywords.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;keywords.py</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 95% (1 of 22 uncovered)</td></tr>
+</table><hr/>
+<pre>    1: from zope.component import adapts
+    1: from zope.interface import implements
+       
+    1: from Products.Archetypes.interfaces import IBaseContent
+    1: from  Products.Archetypes.interfaces.base import IBaseObject
+       # from Products.Archetypes import public as atapi
+       
+    1: from archetypes.schemaextender.interfaces import IBrowserLayerAwareExtender, \
+           ISchemaModifier
+       
+       # from Products.AutocompleteWidget.AutocompleteWidget import AutocompleteWidget
+    1: from vnccollab.content.form.raptus_autocomplete import \
+           KeywordsAutocompleteMultiSelectionWidget
+    1: from vnccollab.content.browser.interfaces import IPackageLayer
+    1: from vnccollab.content import messageFactory as _
+       
+       
+    2: class KeywordsWidgetModifier(object):
+    1:     """Here we assign AutoComplete widget to Subject field"""
+       
+    1:     adapts(IBaseObject)
+    1:     implements(ISchemaModifier, IBrowserLayerAwareExtender)
+           
+    1:     layer = IPackageLayer
+           
+    1:     def __init__(self, context):
+  831:         self.context = context
+               
+    1:     def fiddle(self, schema):
+  831:         if schema.get('subject', None) is None:
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;             return</div>               
+               # update Subject field widget
+  831:         old_widget = schema['subject'].widget
+  831:         schema['subject'].widget = KeywordsAutocompleteMultiSelectionWidget(
+  831:             label=old_widget.label,
+  831:             description=old_widget.description,
+                   # macro='keywordsautocomplete_widget',
+               )
+</pre>
+
+      <div class="footer">
+      Generated for revision Niewersjonowany katalog on 2014-04-05 23:50:24.263143Z
+      </div>
+    </body>
+    </html>

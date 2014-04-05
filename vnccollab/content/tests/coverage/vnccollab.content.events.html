@@ -1,0 +1,42 @@
+
+    <html>
+      <head><title>Test coverage for vnccollab.content.events</title>
+      <style type="text/css">
+        a {text-decoration: none; display: block; padding-right: 1em;}
+        a:hover {background: #EFA;}
+        hr {height: 1px; border: none; border-top: 1px solid gray;}
+        .notcovered {background: #FCC;}
+        .footer {margin: 2em; font-size: small; color: gray;}
+      </style>
+      </head>
+      <body><h1>Test coverage for vnccollab.content.events</h1>
+      <table>
+    
+<tr><td><a href="vnccollab.html">vnccollab/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 92% (31 of 409 uncovered)</td></tr>
+<tr><td><a href="vnccollab.content.html">&nbsp;&nbsp;&nbsp;&nbsp;content/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 92% (31 of 409 uncovered)</td></tr>
+<tr><td><a href="vnccollab.content.events.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;events.py</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 92% (1 of 13 uncovered)</td></tr>
+</table><hr/>
+<pre>    1: from Products.CMFCore.utils import getToolByName
+       
+    1: def turnOffLocalRolesInheritance(obj, event):
+           """Block local roles inheritance for newly created object"""
+           # If user has inherited local roles, locally set roles he inherited before
+           # to avoid definitive lose of access (refs #11945)
+    1:     mtool = getToolByName(obj, 'portal_membership')
+    1:     user = mtool.getAuthenticatedMember()
+    1:     if user is None:
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;         return</div>           
+    1:     context_roles = user.getRolesInContext(obj)
+    1:     global_roles = user.getRoles()
+    4:     local_roles = [r for r in context_roles if r not in global_roles]
+    1:     if local_roles:
+    1:         obj.manage_setLocalRoles(user.getId(), local_roles)
+    1:     obj.__ac_local_roles_block__ = True
+    1:     obj.reindexObjectSecurity()
+</pre>
+
+      <div class="footer">
+      Generated for revision Niewersjonowany katalog on 2014-04-05 23:50:24.263143Z
+      </div>
+    </body>
+    </html>
