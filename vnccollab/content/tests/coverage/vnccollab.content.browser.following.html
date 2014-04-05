@@ -1,0 +1,197 @@
+
+    <html>
+      <head><title>Test coverage for vnccollab.content.browser.following</title>
+      <style type="text/css">
+        a {text-decoration: none; display: block; padding-right: 1em;}
+        a:hover {background: #EFA;}
+        hr {height: 1px; border: none; border-top: 1px solid gray;}
+        .notcovered {background: #FCC;}
+        .footer {margin: 2em; font-size: small; color: gray;}
+      </style>
+      </head>
+      <body><h1>Test coverage for vnccollab.content.browser.following</h1>
+      <table>
+    
+<tr><td><a href="vnccollab.html">vnccollab/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 92% (31 of 409 uncovered)</td></tr>
+<tr><td><a href="vnccollab.content.html">&nbsp;&nbsp;&nbsp;&nbsp;content/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 92% (31 of 409 uncovered)</td></tr>
+<tr><td><a href="vnccollab.content.browser.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;browser/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 97% (4 of 145 uncovered)</td></tr>
+<tr><td><a href="vnccollab.content.browser.following.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;following.py</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 99% (1 of 116 uncovered)</td></tr>
+</table><hr/>
+<pre>    1: import json
+       
+    1: from AccessControl import getSecurityManager
+       
+    1: from zope.component import getUtility
+       
+    1: from Products.Five.browser import BrowserView
+    1: from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+    1: from Products.CMFCore.utils import getToolByName
+       
+    1: from vnccollab.content.interfaces import IFollowing
+       
+       
+    2: class FollowingView(BrowserView):
+           """Provides utility functions for templates regarding users following
+           functionality.
+    1:     """
+       
+    1:     _users_list_template = ViewPageTemplateFile('templates/followers_list.pt')
+       
+    1:     def _auth_user(self):
+               """Authenticated user id"""
+   26:         return getSecurityManager().getUser().getId()
+       
+    1:     def follow_user(self, user1, user2):
+               """Subscribe user1 to user2.
+       
+               If user1 is None, get authenticated user id.
+               """
+    7:         user = user1 and user1 or self._auth_user()
+    7:         following = getUtility(IFollowing)
+    7:         following.subscribe(user, user2)
+       
+    7:         self.request.response.setHeader('Content-Type',
+    7:             'application/javascript')
+    7:         return json.dumps({
+    7:             'title': 'Unfollow',
+    7:             'label': 'Unfollow',
+    7:             'following': True,
+               })
+       
+    1:     def unfollow_user(self, user1, user2):
+               """UnSubscribe user1 from user2.
+       
+               If user1 is None, get authenticated user id.
+               """
+    2:         user = user1 and user1 or self._auth_user()
+    2:         following = getUtility(IFollowing)
+    2:         following.unsubscribe(user, user2)
+       
+    2:         self.request.response.setHeader('Content-Type',
+    2:             'application/javascript')
+    2:         return json.dumps({
+    2:             'title': 'Follow',
+    2:             'label': 'Follow',
+    2:             'following': False,
+               })
+       
+    1:     def follow_button(self, user1, user2):
+               """Returns following button details depending on subscription settings.
+               user1 - profile owner, owner of follow button
+               user2 - user that wants to see follow button for user1
+       
+               If no userid given, get authenticated user id.
+               """
+    8:         user = user2 and user2 or self._auth_user()
+       
+               # return nothing if users are equal
+    8:         if user == user1:
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;             return {}</div>       
+               # check if user1 is followed by user
+    8:         button = {}
+    8:         following = getUtility(IFollowing)
+    8:         if following.is_following(user, user1):
+    3:             button = {
+    3:                 'title': 'Unfollow',
+    3:                 'label': 'Unfollow',
+    3:                 'following': True,
+                   }
+               else:
+    5:             button = {
+    5:                 'title': 'Follow',
+    5:                 'label': 'Follow',
+    5:                 'following': False,
+                   }
+       
+    8:         return button
+       
+    1:     def user_following(self, userid=None):
+               """Returns rendered view of users current user is following"""
+    4:         auth = self._auth_user()
+    4:         userid = userid and userid or auth
+    4:         purl = getToolByName(self.context, 'portal_url')()
+    4:         img = '%s/defaultUser.png' % purl
+    4:         mtool = getToolByName(self.context, 'portal_membership')
+    4:         acl_users = getToolByName(self.context, 'acl_users')
+    4:         owner = acl_users.getUserById(userid)
+    4:         owner_name = userid
+    4:         if owner:
+    4:             owner_name = owner.getProperty('fullname') or userid
+    4:         following = getUtility(IFollowing)
+       
+    4:         users = []
+    5:         for uid in following.get_followings(userid):
+    1:             user = acl_users.getUserById(uid)
+    1:             name = uid
+    1:             homepage = ''
+    1:             if user:
+    1:                 name = user.getProperty('fullname') or uid
+    1:                 homepage = user.getProperty('home_page') or ''
+       
+                   # prepare image url
+    1:             portrait = mtool.getPersonalPortrait(uid)
+    1:             if portrait is not None:
+    1:                 img = portrait.absolute_url()
+       
+    1:             users.append({
+    1:                 'id': uid,
+    1:                 'name': name,
+    1:                 'url': '%s/author/%s' % (purl, uid),
+    1:                 'img': img,
+    1:                 'homepage': homepage,
+    1:                 'following': following.is_following(auth, uid),
+    1:                 'show_button': auth != uid,
+                   })
+       
+    4:         return self._users_list_template(title='%s is Following:' % owner_name,
+    4:             back_url='%s/author/%s' % (purl, userid),
+    4:             users=users)
+       
+    1:     def user_followers(self, userid=None):
+               """Returns rendered view of current user followers"""
+    5:         auth = self._auth_user()
+    5:         userid = userid and userid or auth
+    5:         purl = getToolByName(self.context, 'portal_url')()
+    5:         img = '%s/defaultUser.png' % purl
+    5:         mtool = getToolByName(self.context, 'portal_membership')
+    5:         acl_users = getToolByName(self.context, 'acl_users')
+    5:         owner = acl_users.getUserById(userid)
+    5:         owner_name = userid
+    5:         if owner:
+    5:             owner_name = owner.getProperty('fullname') or userid
+    5:         following = getUtility(IFollowing)
+       
+    5:         users = []
+    7:         for uid in following.get_followers(userid):
+    2:             user = acl_users.getUserById(uid)
+    2:             name = uid
+    2:             homepage = ''
+    2:             if user:
+    2:                 name = user.getProperty('fullname') or uid
+    2:                 homepage = user.getProperty('home_page') or ''
+       
+                   # prepare image url
+    2:             portrait = mtool.getPersonalPortrait(uid)
+    2:             if portrait is not None:
+    2:                 img = portrait.absolute_url()
+       
+    2:             users.append({
+    2:                 'id': uid,
+    2:                 'name': name,
+    2:                 'url': '%s/author/%s' % (purl, uid),
+    2:                 'img': img,
+    2:                 'homepage': homepage,
+    2:                 'following': following.is_following(auth, uid),
+    2:                 'show_button': auth != uid,
+                   })
+       
+    5:         return self._users_list_template(title='%s Followers:' % owner_name,
+    5:             back_url='%s/author/%s' % (purl, userid),
+    5:             users=users)
+</pre>
+
+      <div class="footer">
+      Generated for revision Niewersjonowany katalog on 2014-04-05 23:50:24.263143Z
+      </div>
+    </body>
+    </html>
