@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.5.9 - unreleased
+------------------
+
+- Add unit tests [10876].
+  [Marcin Staniszczak]
+
 1.5.8 - April 02, 2014
 ----------------------
 
