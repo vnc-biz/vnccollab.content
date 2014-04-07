@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.5.9 - Unreleased
+------------------
+
+- Hide user e-mail from UI [10193].
+  [Marcin Staniszczak]
+
 1.5.8 - April 02, 2014
 ----------------------
 

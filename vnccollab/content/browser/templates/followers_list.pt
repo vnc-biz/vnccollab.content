@@ -44,7 +44,6 @@
                         <a class="userName" href=""
                            tal:attributes="href user/url"
                             tal:content="user/name" />
-                        <div class="userEmail" tal:content="user/id" />
                         <a class="userHomepage" href="" target="_blank"
                            tal:condition="user/homepage"
                            tal:attributes="href user/homepage">Homepage</a>
