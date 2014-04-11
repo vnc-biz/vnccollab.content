@@ -1,8 +1,14 @@
 Changelog
 =========
 
-1.5.9 - Unreleased
-------------------
+1.5.9 - April 11, 2014
+----------------------
+
+- Add unit tests [10876].
+  [Marcin Staniszczak]
+
+- Update README.txt file [10867].
+  [Marcin Staniszczak]
 
 - Hide user e-mail from UI [10193].
   [Marcin Staniszczak]
@@ -21,7 +27,7 @@ Changelog
 
 - Adds version.txt.
   [Jose Dinuncio]
-    
+
 1.5.6 - December 06, 2013
 -------------------------
 
