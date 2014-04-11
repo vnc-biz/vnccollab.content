@@ -1,0 +1,133 @@
+
+    <html>
+      <head><title>Test coverage for vnccollab.content.following</title>
+      <style type="text/css">
+        a {text-decoration: none; display: block; padding-right: 1em;}
+        a:hover {background: #EFA;}
+        hr {height: 1px; border: none; border-top: 1px solid gray;}
+        .notcovered {background: #FCC;}
+        .footer {margin: 2em; font-size: small; color: gray;}
+      </style>
+      </head>
+      <body><h1>Test coverage for vnccollab.content.following</h1>
+      <table>
+    
+<tr><td><a href="vnccollab.html">vnccollab/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 92% (31 of 409 uncovered)</td></tr>
+<tr><td><a href="vnccollab.content.html">&nbsp;&nbsp;&nbsp;&nbsp;content/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 92% (31 of 409 uncovered)</td></tr>
+<tr><td><a href="vnccollab.content.following.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;following.py</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 92% (4 of 57 uncovered)</td></tr>
+</table><hr/>
+<pre>       # import transaction
+    1: from persistent import Persistent
+    1: from persistent.dict import PersistentDict
+    1: from persistent.list import PersistentList
+    1: from AccessControl import getSecurityManager
+       
+    1: from zope.interface import implements
+       
+    1: from .interfaces import IFollowing
+       
+       
+    2: class Following(Persistent):
+           """Local utility for follow/unfollow users.
+    1:     """
+    1:     implements(IFollowing)
+    1:     __allow_access_to_unprotected_subobjects__ = True
+       
+    1:     def __init__(self):
+    1:         self._subscribed_to = PersistentDict()
+    1:         self._my_subscribers = PersistentDict()
+       
+    1:     def _auth_user_id(self):
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;         manager = getSecurityManager()</div><div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;         return manager.getUser().getId()</div>       
+    1:     def _append(self, data, key, value):
+   40:         if data.get(key, False):
+    4:             if value not in data[key]:
+    4:                 data[key].append(value)
+               else:
+   36:             data[key] = PersistentList()
+   36:             data[key].append(value)
+       
+    1:     def _remove(self, data, key, value):
+    6:         if data.get(key, False) and value in data[key]:
+    6:             data[key].remove(value)
+       
+           # High Level API Methods
+       
+    1:     def subscribe(self, user1, user2):
+               """Subscribe 'user1' to 'user2'.
+       
+               If user1 is None, get authenticated user id.
+               """
+   20:         user = user1 if user1 else self._auth_user_id()
+   20:         if user2 == user:
+                   # do not subscribe to myself
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;             return</div>   20:         self._append(self._subscribed_to, user, user2)
+   20:         self._append(self._my_subscribers, user2, user)
+       
+    1:     def unsubscribe(self, user1, user2):
+               """Unsubscribe 'user1' from 'user2'.
+       
+               If user1 is None, get authenticated user id.
+               """
+    3:         user = user1 if user1 else self._auth_user_id()
+    3:         if user2 == user:
+                   # nothing to do
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;             return</div>    3:         self._remove(self._subscribed_to, user, user2)
+    3:         self._remove(self._my_subscribers, user2, user)
+       
+    1:     def is_following(self, user1, user2):
+               """Check if 'user1' is following 'user2'.
+       
+               If user1 is None, get authenticated user id.
+               """
+   15:         user = user1 if user1 else self._auth_user_id()
+   15:         return self._subscribed_to.get(user, False) and \
+    8:             user2 in self._subscribed_to[user]
+       
+    1:     def is_followed_by(self, user1, user2):
+               """Check if 'user1' is followed by 'user2'.
+       
+               If user1 is None, get authenticated user id.
+               """
+    4:         user = user1 if user1 else self._auth_user_id()
+    4:         return self._my_subscribers.get(user, False) and \
+    3:             user2 in self._my_subscribers[user]
+       
+    1:     def has_followers(self, user):
+               """Check if user is followed by any other user.
+       
+               If user is None, get authenticated user id.
+               """
+    2:         user = user if user else self._auth_user_id()
+    2:         return len(self._my_subscribers.get(user, [])) &gt; 0
+       
+    1:     def has_followings(self, user):
+               """Check if user is following anybody.
+       
+               If user is None, get authenticated user id.
+               """
+    2:         user = user if user else self._auth_user_id()
+    2:         return len(self._subscribed_to.get(user, [])) &gt; 0
+       
+    1:     def get_followers(self, user):
+               """Get all followers of the user.
+       
+               If user is None, get authenticated user id.
+               """
+   10:         user = user if user else self._auth_user_id()
+   10:         return list(self._my_subscribers.get(user, []))
+       
+    1:     def get_followings(self, user):
+               """Get all users the user is following.
+       
+               If user is None, get authenticated user id.
+               """
+    9:         user = user if user else self._auth_user_id()
+    9:         return list(self._subscribed_to.get(user, []))
+</pre>
+
+      <div class="footer">
+      Generated for revision Niewersjonowany katalog on 2014-04-05 23:50:24.263143Z
+      </div>
+    </body>
+    </html>

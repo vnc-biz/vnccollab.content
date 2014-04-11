@@ -1,0 +1,68 @@
+
+    <html>
+      <head><title>Test coverage for vnccollab.content.userdataschema</title>
+      <style type="text/css">
+        a {text-decoration: none; display: block; padding-right: 1em;}
+        a:hover {background: #EFA;}
+        hr {height: 1px; border: none; border-top: 1px solid gray;}
+        .notcovered {background: #FCC;}
+        .footer {margin: 2em; font-size: small; color: gray;}
+      </style>
+      </head>
+      <body><h1>Test coverage for vnccollab.content.userdataschema</h1>
+      <table>
+    
+<tr><td><a href="vnccollab.html">vnccollab/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 92% (31 of 409 uncovered)</td></tr>
+<tr><td><a href="vnccollab.content.html">&nbsp;&nbsp;&nbsp;&nbsp;content/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 92% (31 of 409 uncovered)</td></tr>
+<tr><td><a href="vnccollab.content.userdataschema.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userdataschema.py</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 90% (3 of 31 uncovered)</td></tr>
+</table><hr/>
+<pre>    1: from zope import schema
+    1: from zope.component import adapts
+    1: from zope.interface import implements, Interface
+    1: from zope.publisher.browser import IBrowserRequest
+       
+    1: from collective.customizablePersonalizeForm.adapters.interfaces import \
+           IExtendedUserDataSchema, IExtendedUserDataPanel
+       
+    1: from vnccollab.content import messageFactory as _
+       
+       
+    2: class UserDataSchemaAdapter(object):
+    1:     adapts(object, IBrowserRequest)
+    1:     implements(IExtendedUserDataSchema)
+       
+    1:     def __init__(self, context, request):
+    1:         self.context = context
+    1:         self.request = request
+       
+    1:     def getSchema(self):
+    1:         return IUserDataSchema
+       
+       
+    2: class UserDataSchemaPropertiesAdapter(object):
+    1:     adapts(object, IBrowserRequest)
+    1:     implements(IExtendedUserDataPanel)
+       
+    1:     def __init__(self, context, request):
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;         self.context = context</div><div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;         self.request = request</div>       
+    1:     def getProperties(self):
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;         return ['position', 'telephone']</div>       
+       
+    2: class IUserDataSchema(Interface):
+       
+    1:     position = schema.TextLine(
+    1:         title=_("Company Position"),
+    1:         description=_("Position in the company"),
+    1:         required=False)
+       
+    1:     telephone = schema.TextLine(
+    1:         title=_("Telephone Number"),
+    1:         description=_("Personal Phone Number"),
+    1:         required=False)
+</pre>
+
+      <div class="footer">
+      Generated for revision Niewersjonowany katalog on 2014-04-05 23:50:24.263143Z
+      </div>
+    </body>
+    </html>

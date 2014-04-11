@@ -1,0 +1,91 @@
+
+    <html>
+      <head><title>Test coverage for vnccollab.content.testing</title>
+      <style type="text/css">
+        a {text-decoration: none; display: block; padding-right: 1em;}
+        a:hover {background: #EFA;}
+        hr {height: 1px; border: none; border-top: 1px solid gray;}
+        .notcovered {background: #FCC;}
+        .footer {margin: 2em; font-size: small; color: gray;}
+      </style>
+      </head>
+      <body><h1>Test coverage for vnccollab.content.testing</h1>
+      <table>
+    
+<tr><td><a href="vnccollab.html">vnccollab/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 92% (31 of 409 uncovered)</td></tr>
+<tr><td><a href="vnccollab.content.html">&nbsp;&nbsp;&nbsp;&nbsp;content/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 92% (31 of 409 uncovered)</td></tr>
+<tr><td><a href="vnccollab.content.testing.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testing.py</a></td> <td style="background: orange">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 80% (10 of 51 uncovered)</td></tr>
+</table><hr/>
+<pre>    1: import transaction
+       
+    1: from plone.testing import z2
+       
+    1: from plone.app.testing import PloneSandboxLayer
+    1: from plone.app.testing import applyProfile
+    1: from plone.app.testing import PLONE_FIXTURE
+    1: from plone.app.testing import IntegrationTesting
+    1: from plone.app.testing import FunctionalTesting
+       
+    1: import collective.customizablePersonalizeForm
+       
+       
+    2: class VnccollabContentLayer(PloneSandboxLayer):
+       
+    1:     defaultBases = (PLONE_FIXTURE,)
+       
+    1:     def setUpZope(self, app, configurationContext):
+               # Load ZCML
+               dependencies = [
+    1:             'raptus.autocompletewidget',
+    1:             'collective.customizablePersonalizeForm',
+    1:             'vnccollab.content',
+               ]
+       
+    4:         for package in dependencies:
+    3:             module = __import__(package, fromlist=[''])
+    3:             self.loadZCML(package=module)
+       
+    1:         self.loadZCML(package=collective.customizablePersonalizeForm,
+    1:                 name='overrides.zcml')
+       
+    1:         z2.installProduct(app, 'collective.customizablePersonalizeForm')
+    1:         z2.installProduct(app, 'vnccollab.content')
+       
+    1:     def setUpPloneSite(self, portal):
+    1:         applyProfile(portal, 'collective.customizablePersonalizeForm:default')
+    1:         applyProfile(portal, 'vnccollab.content:default')
+       
+       
+    1: VNCCOLLAB_CONTENT_FIXTURE = VnccollabContentLayer()
+    1: VNCCOLLAB_CONTENT_INTEGRATION_TESTING = IntegrationTesting(
+    1:     bases=(VNCCOLLAB_CONTENT_FIXTURE,),
+    1:     name='VnccollabContentLayer:Integration')
+    1: VNCCOLLAB_CONTENT_FUNCTIONAL_TESTING = FunctionalTesting(
+    1:     bases=(VNCCOLLAB_CONTENT_FIXTURE,),
+    1:     name='VnccollabContentLayer:Functional')
+       
+       
+    1: def setObjDate(obj, dt):
+           """Prevent update of modification date
+              during reindexing"""
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;     obj.setCreationDate(dt)</div><div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;     obj.setEffectiveDate(dt)</div><div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;     obj.setModificationDate(dt)</div><div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;     od = obj.__dict__</div><div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;     od['notifyModified'] = lambda *args: None</div><div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;     obj.reindexObject()</div><div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;     del od['notifyModified']</div>       
+       
+    1: def createObject(context, _type, id, delete_first=True, check_for_first=False,
+    1:                  object_date=None, **kwargs):
+    7:     result = None
+    7:     if delete_first and id in context.objectIds():
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;         context.manage_delObjects([id])</div>    7:     if not check_for_first or id not in context.objectIds():
+    7:         result = context[context.invokeFactory(_type, id, **kwargs)]
+           else:
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;         result = context[id]</div>       
+    7:     if object_date:
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;         setObjDate(result, object_date)</div>       
+    7:     transaction.commit()
+    7:     return result
+</pre>
+
+      <div class="footer">
+      Generated for revision Niewersjonowany katalog on 2014-04-05 23:50:24.263143Z
+      </div>
+    </body>
+    </html>

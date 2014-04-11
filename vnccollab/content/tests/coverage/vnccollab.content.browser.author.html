@@ -1,0 +1,73 @@
+
+    <html>
+      <head><title>Test coverage for vnccollab.content.browser.author</title>
+      <style type="text/css">
+        a {text-decoration: none; display: block; padding-right: 1em;}
+        a:hover {background: #EFA;}
+        hr {height: 1px; border: none; border-top: 1px solid gray;}
+        .notcovered {background: #FCC;}
+        .footer {margin: 2em; font-size: small; color: gray;}
+      </style>
+      </head>
+      <body><h1>Test coverage for vnccollab.content.browser.author</h1>
+      <table>
+    
+<tr><td><a href="vnccollab.html">vnccollab/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 92% (31 of 409 uncovered)</td></tr>
+<tr><td><a href="vnccollab.content.html">&nbsp;&nbsp;&nbsp;&nbsp;content/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 92% (31 of 409 uncovered)</td></tr>
+<tr><td><a href="vnccollab.content.browser.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;browser/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 97% (4 of 145 uncovered)</td></tr>
+<tr><td><a href="vnccollab.content.browser.author.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;author.py</a></td> <td style="background: orange">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 88% (3 of 25 uncovered)</td></tr>
+</table><hr/>
+<pre>    1: from plone import api
+    1: from Products.Five.browser import BrowserView
+       
+    1: from vnccollab.content import messageFactory as _
+       
+    1: AUTHOR_TABS_KEY = 'vncollab.content.author_tab_list'
+       
+       
+    2: class AuthorView(BrowserView):
+       
+    1:     def __init__(self, context, request):
+    5:         BrowserView.__init__(self, context, request)
+    5:         self.uid = self.request.form.get('uid', '')
+       
+    1:     def tabs_info(self):
+               """Returns a string representing the dynamic tabs in author.cpt."""
+    5:         return self.get_tabs_info(self.uid)
+       
+    1:     def get_tabs_info(self, uid):
+               """Returns a list with info about the dynamic tabs for author.cpt.
+       
+               The list consist in a tuple of (title, url), obtained from the
+               registry. The registry contains lines of the form:
+       
+                   title::path
+       
+               The title is localized and the path is converted into an URL, after
+               replacing certain strings with the arguments of this method.
+               Currently the list of replacements is:
+       
+                   '{%uid}': Replaced by the uid argument.
+               """
+       
+    5:         try:
+    5:             info = api.portal.get_registry_record(AUTHOR_TABS_KEY)
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;         except api.exc.InvalidParameterError:</div><div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;             return []</div>       
+    5:         base_url = api.portal.get().absolute_url()
+       
+    5:         tabs = []
+   15:         for line in info:
+   10:             title, path, mode = (line.split('::') + ['', '', ''])[:3]
+   10:             if not title or not path:
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;                 continue</div>   10:             path = path.replace('{%uid}', uid)
+   10:             url = '{0}/{1}'.format(base_url, path)
+   10:             tabs.append((_(title), url, mode))
+       
+    5:         return tabs
+</pre>
+
+      <div class="footer">
+      Generated for revision Niewersjonowany katalog on 2014-04-05 23:50:24.263143Z
+      </div>
+    </body>
+    </html>

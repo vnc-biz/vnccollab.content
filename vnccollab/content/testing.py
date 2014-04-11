@@ -1,3 +1,5 @@
+import transaction
+
 from plone.testing import z2
 
 from plone.app.testing import PloneSandboxLayer
@@ -43,3 +45,32 @@ VNCCOLLAB_CONTENT_INTEGRATION_TESTING = IntegrationTesting(
 VNCCOLLAB_CONTENT_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(VNCCOLLAB_CONTENT_FIXTURE,),
     name='VnccollabContentLayer:Functional')
+
+
+def setObjDate(obj, dt):
+    """Prevent update of modification date
+       during reindexing"""
+    obj.setCreationDate(dt)
+    obj.setEffectiveDate(dt)
+    obj.setModificationDate(dt)
+    od = obj.__dict__
+    od['notifyModified'] = lambda *args: None
+    obj.reindexObject()
+    del od['notifyModified']
+
+
+def createObject(context, _type, id, delete_first=True, check_for_first=False,
+                 object_date=None, **kwargs):
+    result = None
+    if delete_first and id in context.objectIds():
+        context.manage_delObjects([id])
+    if not check_for_first or id not in context.objectIds():
+        result = context[context.invokeFactory(_type, id, **kwargs)]
+    else:
+        result = context[id]
+
+    if object_date:
+        setObjDate(result, object_date)
+
+    transaction.commit()
+    return result
