@@ -140,11 +140,6 @@
                         <span tal:content="authorinfo/language">Language</span>
                       </p>
 
-                      <p tal:condition="python:authormember.getProperty('email', '')">
-                        <tal:i18n i18n:translate="">E-mail</tal:i18n>:
-                        <span tal:content="python:authormember.getProperty('email')">Email</span>
-                      </p>
-
                       <p tal:condition="python:authormember.getProperty('telephone', '')">
                         Phone:
                         <span tal:content="python:authormember.getProperty('telephone')">Phone</span>

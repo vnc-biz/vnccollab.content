@@ -10,6 +10,9 @@ Changelog
 - Update README.txt file [10867].
   [Marcin Staniszczak]
 
+- Hide user e-mail from UI [10193].
+  [Marcin Staniszczak]
+
 1.5.8 - April 02, 2014
 ----------------------
 
