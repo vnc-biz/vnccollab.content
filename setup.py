@@ -14,7 +14,7 @@ version = open('version.txt').read()
 setup(name='vnccollab.content',
       version=version,
       description="VNC Collaboration Content Types",
-      long_description=open(os.path.join("docs", "README.txt")).read() + "\n" +
+      long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       classifiers=[
           'Framework :: Plone',
@@ -24,7 +24,7 @@ setup(name='vnccollab.content',
       keywords='plone content type archetypes vnc',
       author='Vitaliy Podoba',
       author_email='vitaliy.podoba@vnc.biz',
-      url='https://redmine.vnc.biz/redmine/projects/vnc-plone-content',
+      url='https://github.com/vnc-biz/vnccollab.content',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['vnccollab', ],
