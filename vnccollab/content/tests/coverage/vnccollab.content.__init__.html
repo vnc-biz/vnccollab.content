@@ -1,0 +1,70 @@
+
+    <html>
+      <head><title>Test coverage for vnccollab.content.__init__</title>
+      <style type="text/css">
+        a {text-decoration: none; display: block; padding-right: 1em;}
+        a:hover {background: #EFA;}
+        hr {height: 1px; border: none; border-top: 1px solid gray;}
+        .notcovered {background: #FCC;}
+        .footer {margin: 2em; font-size: small; color: gray;}
+      </style>
+      </head>
+      <body><h1>Test coverage for vnccollab.content.__init__</h1>
+      <table>
+    
+<tr><td><a href="vnccollab.html">vnccollab/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 92% (31 of 409 uncovered)</td></tr>
+<tr><td><a href="vnccollab.content.html">&nbsp;&nbsp;&nbsp;&nbsp;content/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 92% (31 of 409 uncovered)</td></tr>
+<tr><td><a href="vnccollab.content.__init__.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__init__.py</a></td> <td style="background: red">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 68% (5 of 16 uncovered)</td></tr>
+</table><hr/>
+<pre>       """Main product initializer
+    1: """
+       
+    1: from zope.i18nmessageid import MessageFactory
+    1: from vnccollab.content import config
+       
+    1: from Products.Archetypes import atapi
+    1: from Products.CMFCore import utils
+       
+       # Define a message factory for when this product is internationalised.
+       # This will be imported with the special name "_" in most modules. Strings
+       # like _(u"message") will then be extracted by i18n tools for translation.
+       
+    1: messageFactory = MessageFactory('vnccollab.content')
+       
+       
+    1: def initialize(context):
+           """Initializer called when used as a Zope 2 product.
+       
+           This is referenced from configure.zcml. Regstrations as a "Zope 2 product"
+           is necessary for GenericSetup profiles to work, for example.
+       
+           Here, we call the Archetypes machinery to register our content types
+           with Zope and the CMF.
+           """
+       
+           # Retrieve the content types that have been registered with Archetypes
+           # This happens when the content type is imported and the registerType()
+           # call in the content type's module is invoked. Actually, this happens
+           # during ZCML processing, but we do it here again to be explicit. Of
+           # course, even if we import the module several times, it is only run
+           # once.
+       
+    1:     content_types, constructors, ftis = atapi.process_types(
+    1:         atapi.listTypes(config.PROJECTNAME),
+    1:         config.PROJECTNAME)
+       
+           # Now initialize all these content types. The initialization process takes
+           # care of registering low-level Zope 2 factories, including the relevant
+           # add-permission. These are listed in config.py. We use different
+           # permissions for each content type to allow maximum flexibility of who
+           # can add which content types, where. The roles are set up in rolemap.xml
+           # in the GenericSetup profile.
+       
+    1:     for atype, constructor in zip(content_types, constructors):
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;         utils.ContentInit('%s: %s' % (config.PROJECTNAME, atype.portal_type),</div><div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;             content_types=(atype, ),</div><div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;             permission=config.ADD_PERMISSIONS[atype.portal_type],</div><div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;             extra_constructors=(constructor,),</div><div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;             ).initialize(context)</div></pre>
+
+      <div class="footer">
+      Generated for revision Niewersjonowany katalog on 2014-04-05 23:50:24.263143Z
+      </div>
+    </body>
+    </html>

@@ -1,0 +1,216 @@
+
+    <html>
+      <head><title>Test coverage for vnccollab.content.form.raptus_autocomplete</title>
+      <style type="text/css">
+        a {text-decoration: none; display: block; padding-right: 1em;}
+        a:hover {background: #EFA;}
+        hr {height: 1px; border: none; border-top: 1px solid gray;}
+        .notcovered {background: #FCC;}
+        .footer {margin: 2em; font-size: small; color: gray;}
+      </style>
+      </head>
+      <body><h1>Test coverage for vnccollab.content.form.raptus_autocomplete</h1>
+      <table>
+    
+<tr><td><a href="vnccollab.html">vnccollab/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 92% (31 of 409 uncovered)</td></tr>
+<tr><td><a href="vnccollab.content.html">&nbsp;&nbsp;&nbsp;&nbsp;content/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 92% (31 of 409 uncovered)</td></tr>
+<tr><td><a href="vnccollab.content.form.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;form/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 95% (3 of 68 uncovered)</td></tr>
+<tr><td><a href="vnccollab.content.form.raptus_autocomplete.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raptus_autocomplete.py</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 95% (3 of 67 uncovered)</td></tr>
+</table><hr/>
+<pre>    1: import simplejson
+       
+    1: from Acquisition import aq_inner
+       
+    1: from Products.Five.browser import BrowserView
+       
+    1: from Products.Archetypes.Registry import registerPropertyType
+    1: from Products.Archetypes.Registry import registerWidget
+       
+    1: from Products.CMFPlone.utils import safe_unicode
+       
+    1: from raptus.autocompletewidget import widget as base
+       
+       
+    2: class KeywordsAutocompleteSearch(BrowserView):
+           
+    1:     def __call__(self):
+    2:         return simplejson.dumps(self._search())
+           
+    1:     def _search(self, param='term'):
+    4:         context = aq_inner(self.context)
+    4:         field = self.request.get('f', None)
+    4:         query = self.request.get(param, '')
+    4:         limit = self.request.get('limit', None)
+    4:         if not query or not field:
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;             return []</div>               
+    4:         field = context.Schema().getField(field)
+    4:         if not field:
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;             return []</div>               
+    4:         query = query.lower()
+    4:         values = context.collectKeywords(field.getName(), field.accessor)
+   16:         return [v for v in values if query in v.lower()]
+           
+    2: class KeywordsAutocompletePopulate(KeywordsAutocompleteSearch):
+           
+    1:     def __call__(self):
+    2:         query = (self.request.get('q', '') or '').strip()
+    2:         if not query:
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;             return ''</div>               
+    2:         results = self._search('q')
+    5:         for r in results:
+    4:             if query == r:
+    1:                 return r
+       
+    2: class KeywordsAutocompleteBaseWidget(base.AutocompleteBaseWidget):
+           """Override raptus.autocompletewidget in order to set our own
+           ajax search autocomplete url which knows how to get Archetypes
+           Keywords Widget vocabulary items.
+    1:     """
+           
+           # JavaScript template
+           
+           js_template = """\
+           (function($) {
+               $().ready(function() {
+                   $('#archetypes-fieldname-%(id)s #%(id)s').each(function() {
+                       $('#archetypes-fieldname-%(id)s').append('&lt;input name="%(id)s-input" type="text" id="%(id)s-input" /&gt;');
+                       %(js_populate)s
+                       $(this).remove();
+                       
+                       // append Add link to autocomplete input, it'll add new tags,
+                       // that do not exist yet
+                       var input = $('#%(id)s-input');
+                       var add_link = input.after('&lt;a href="#" style="margin-left: 10px" id="autocomplete-add-%(id)s"&gt;Add as a New Tag&lt;/a&gt;');
+                       $('#autocomplete-add-%(id)s').click(function(event){
+                         // skip empty value
+                         if (!input.val().strip()) {
+                           input.val('');
+                           return false;
+                         }
+                         
+                         // populate checkboxes from entered value
+                         value = input.val().split("\\n");
+                         for (var i=0; i&lt;value.length; i++) {
+                           var v = value[i].strip();
+                           if (v) {
+                               $('#archetypes-fieldname-%(id)s #%(id)s-input').before("&lt;" + "label class='plain'&gt;&lt;" + "input type='checkbox' name='%(id)s:list' checked='checked' value='" + v + "' /&gt; " + v + "&lt;/label&gt;&lt;br /&gt;");
+                           }
+                         }
+                         
+                         // reset input
+                         input.val('');
+                         return false;
+                       });
+                       
+                       $('#archetypes-fieldname-%(id)s #%(id)s-input').autocomplete({
+                           source: '%(url)s/@@keywordsautocompletewidget-search?f=%(id)s',
+                           minLength: %(minChars)d,
+                           select: %(js_callback)s
+                       });
+                   })
+               });
+           })(jQuery);
+    1:     """
+       
+    2: class KeywordsAutocompleteSelectionWidget(KeywordsAutocompleteBaseWidget,
+    1:     base.AutocompleteSelectionWidget):
+    1:     """See doc string in above defined class"""
+           
+    1:     _properties = base.AutocompleteSelectionWidget._properties.copy()
+           
+           # JavaScript template
+           
+           # the funny &lt;" + "input bit is to prevent breakage in testbrowser tests
+           # when it parses the js as a real input, but with a bogus value
+           js_callback_template = """\
+           function(event, ui) {
+               var data = ui.item ? ui.item.value : '';
+               var field = $('#archetypes-fieldname-%(id)s input[type="radio"][value="' + data + '"]');
+               if(field.length == 0)
+                   $('#archetypes-fieldname-%(id)s #%(id)s-input').before("&lt;" + "label class='plain'&gt;&lt;" + "input type='radio' name='%(id)s' checked='checked' value='" + data + "' /&gt; " + data + "&lt;/label&gt;&lt;br /&gt;");
+               else
+                   field.each(function() { this.checked = true });
+               if(data) {
+                   $('#archetypes-fieldname-%(id)s #%(id)s-input').val('');
+                   return false;
+               }
+           }
+    1:     """
+           
+           js_populate_template = """\
+           var value = $(this).val();
+           if(value)
+               $.get('%(url)s/@@keywordsautocompletewidget-populate', {'f': '%(id)s', 'q': value}, function(data) {
+                   if(data) {
+                       $('#archetypes-fieldname-%(id)s #%(id)s-input').before("&lt;" + "label class='plain'&gt;&lt;" + "input type='radio' name='%(id)s' checked='checked' value='" + data + "' /&gt; " + data + "&lt;/label&gt;&lt;br /&gt;");
+                   }
+               }, 'json');
+    1:     """
+           
+    2: class KeywordsAutocompleteMultiSelectionWidget(KeywordsAutocompleteBaseWidget,
+    1:     base.AutocompleteMultiSelectionWidget):
+    1:     """See doc string in above defined class"""
+           
+    1:     _properties = base.AutocompleteMultiSelectionWidget._properties.copy()
+           
+           # JavaScript template
+           
+           # the funny &lt;" + "input bit is to prevent breakage in testbrowser tests
+           # when it parses the js as a real input, but with a bogus value
+           js_callback_template = """\
+           function(event, ui) {
+               var data = ui.item ? ui.item.value : '';
+               var field = $('#archetypes-fieldname-%(id)s input[type="checkbox"][value="' + data + '"]');
+               if(field.length == 0)
+                   $('#archetypes-fieldname-%(id)s #%(id)s-input').before("&lt;" + "label class='plain'&gt;&lt;" + "input type='checkbox' name='%(id)s:list' checked='checked' value='" + data + "' /&gt; " + data + "&lt;/label&gt;&lt;br /&gt;");
+               else
+                   field.each(function() { this.checked = true });
+               if(data) {
+                   $('#archetypes-fieldname-%(id)s #%(id)s-input').val('');
+                   return false;
+               }
+           }
+    1:     """
+           
+           js_populate_template = """\
+           value = $(this).text().split("\\n");
+           if(value)
+               for(var i=0; i&lt;value.length; i++)
+                   $.get('%(url)s/@@keywordsautocompletewidget-populate', {'f': '%(id)s', 'q': value[i]}, function(data) {
+                       if(data) {
+                           $('#archetypes-fieldname-%(id)s #%(id)s-input').before("&lt;" + "label class='plain'&gt;&lt;" + "input type='checkbox' name='%(id)s:list' checked='checked' value='" + data + "' /&gt; " + data + "&lt;/label&gt;&lt;br /&gt;");
+                       }
+                   }, 'html');
+    1:     """
+       
+    1: registerWidget(KeywordsAutocompleteSelectionWidget,
+    1:                title='Keywords Autocomplete selection',
+    1:                description=(''),
+    1:                used_for=('Products.Archetypes.Field.StringField',)
+                      )
+       
+    1: registerWidget(KeywordsAutocompleteMultiSelectionWidget,
+    1:                title='Keywords Autocomplete multiselection',
+    1:                description=(''),
+    1:                used_for=('Products.Archetypes.Field.LinesField',)
+                      )
+       
+    1: registerPropertyType('autoFill', 'boolean', KeywordsAutocompleteSelectionWidget)
+    1: registerPropertyType('minChars', 'integer', KeywordsAutocompleteSelectionWidget)
+    1: registerPropertyType('maxResults', 'integer',
+    1:     KeywordsAutocompleteSelectionWidget)
+    1: registerPropertyType('mustMatch', 'boolean',
+    1:     KeywordsAutocompleteSelectionWidget)
+    1: registerPropertyType('matchContains', 'boolean',
+    1:     KeywordsAutocompleteSelectionWidget)
+    1: registerPropertyType('formatItem', 'string',
+    1:     KeywordsAutocompleteSelectionWidget)
+    1: registerPropertyType('formatResult', 'string',
+    1:     KeywordsAutocompleteSelectionWidget)
+</pre>
+
+      <div class="footer">
+      Generated for revision Niewersjonowany katalog on 2014-04-05 23:50:24.263143Z
+      </div>
+    </body>
+    </html>
