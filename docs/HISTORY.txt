@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.5.10 - unreleased
+-------------------
+
+- Cleans setup [11081].
+  [Jose Dinuncio]
+
 1.5.9 - April 11, 2014
 ----------------------
 
@@ -69,7 +75,7 @@ Changelog
 - Fixes license and adds AUTHORS.txt.
   [Jose Dinuncio]
 
-  1.5.3 - January 30, 2013
+1.5.3 - January 30, 2013
 ------------------------
 
 - Do not depend on PloneBoard and Products.Autocomplete anymore.
@@ -89,7 +95,7 @@ Changelog
 
 
 1.5.1 - October 24, 2012
-----------------------
+------------------------
 
 - Update repository url.
   [Vitaliy Podoba]
@@ -105,7 +111,7 @@ Changelog
   [Vitaliy Podoba]
 
 
-1.0dev (unreleased)
--------------------
+1.0dev December 26, 2011
+------------------------
 
 - Initial release
