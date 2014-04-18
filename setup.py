@@ -9,12 +9,12 @@ from setuptools import setup, find_packages
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = open('version.txt').read()
+version = open('version.txt').readline().strip()
 
 setup(name='vnccollab.content',
       version=version,
       description="VNC Collaboration Content Types",
-      long_description=open(os.path.join("docs", "README.txt")).read() + "\n" +
+      long_description=open("README.rst").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       classifiers=[
           'Framework :: Plone',
@@ -24,7 +24,7 @@ setup(name='vnccollab.content',
       keywords='plone content type archetypes vnc',
       author='Vitaliy Podoba',
       author_email='vitaliy.podoba@vnc.biz',
-      url='https://redmine.vnc.biz/redmine/projects/vnc-plone-content',
+      url='https://github.com/vnc-biz/vnccollab.content',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['vnccollab', ],
