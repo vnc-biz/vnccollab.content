@@ -1,5 +1,3 @@
-.. contents::
-
 vnccollab.content
 =================
 
@@ -14,7 +12,7 @@ Subject field.
 Installation
 ------------
 
-Please read INSTALL.txt for more details.
+Please read INSTALL.rst for more details.
 
 Usage
 -----
