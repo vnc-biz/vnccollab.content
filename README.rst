@@ -9,10 +9,12 @@ the `Following` utility to create following between users (user A is
 followed/following user B), author page, and `AutoComplete` widget to
 Subject field.
 
+
 Installation
 ------------
 
-Please read INSTALL.rst for more details.
+Please read INSTALL.rst for details about installation.
+
 
 Usage
 -----
@@ -46,3 +48,4 @@ and you can use the `Following` methods:
 
 * get_followings(user) - get all users the user is following. If user is None,
   get the current user.
+
