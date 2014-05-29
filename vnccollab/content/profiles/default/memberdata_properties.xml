@@ -2,4 +2,6 @@
 <object name="portal_memberdata" meta_type="Plone Memberdata Tool">
  <property name="position" type="string"/>
  <property name="telephone" type="string"/>
+ <property name="etherpad_username" type="string"/>
+ <property name="etherpad_password" type="string"/>
 </object>
