@@ -4,6 +4,9 @@ Changelog
 1.5.10 - unreleased
 -------------------
 
+- Adds iframe portlet [11086].
+  [Jose Dinuncio]
+
 - Cleans setup [11081].
   [Jose Dinuncio]
 
