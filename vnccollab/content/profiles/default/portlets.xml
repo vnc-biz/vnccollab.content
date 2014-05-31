@@ -12,4 +12,13 @@
     <for interface="plone.app.portlets.interfaces.IDashboard" />
   </portlet>
 
+  <portlet
+    addview="vnccollab.content.portlets.SpecialRSSPortlet"
+    title="Special RSS portlet"
+    description="Renders list of RSS feed."
+    i18n:attributes="title;description">
+    <for interface="plone.app.portlets.interfaces.IColumn" />
+    <for interface="plone.app.portlets.interfaces.IDashboard" />
+  </portlet>
+
 </portlets>

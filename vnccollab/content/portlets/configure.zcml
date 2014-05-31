@@ -15,4 +15,16 @@
       addview=".generic_iframe.AddForm"
       editview=".generic_iframe.EditForm"
       />
+
+  <plone:portlet
+      name="vnccollab.content.portlets.SpecialRSSPortlet"
+      interface=".special_rss.ISpecialRSSPortlet"
+      assignment=".special_rss.Assignment"
+      view_permission="zope2.View"
+      edit_permission="cmf.ManagePortal"
+      renderer=".special_rss.Renderer"
+      addview=".special_rss.AddForm"
+      editview=".special_rss.EditForm"
+      />
+
 </configure>
