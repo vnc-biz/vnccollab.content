@@ -17,7 +17,7 @@ class IGenericIframePortlet(IPortletDataProvider):
 
     header = schema.TextLine(
         title=_(u"Header"),
-        description=_(u"Header of the portlet."),
+        description=_(u"Header of the Generic Iframe Portlet."),
         required=True,
         default=u'Generic IFrame')
 

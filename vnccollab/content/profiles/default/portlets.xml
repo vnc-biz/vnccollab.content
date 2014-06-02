@@ -14,8 +14,17 @@
 
   <portlet
     addview="vnccollab.content.portlets.SpecialRSSPortlet"
-    title="Special RSS portlet"
+    title="Special RSS"
     description="Renders list of RSS feed."
+    i18n:attributes="title;description">
+    <for interface="plone.app.portlets.interfaces.IColumn" />
+    <for interface="plone.app.portlets.interfaces.IDashboard" />
+  </portlet>
+
+  <portlet
+    addview="vnccollab.content.portlets.UsersBoxPortlet"
+    title="Users Box"
+    description="Lists users contributed to current container."
     i18n:attributes="title;description">
     <for interface="plone.app.portlets.interfaces.IColumn" />
     <for interface="plone.app.portlets.interfaces.IDashboard" />

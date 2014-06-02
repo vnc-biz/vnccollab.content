@@ -15,7 +15,7 @@ class ISpecialRSSPortlet(IPortletDataProvider):
 
     header = schema.TextLine(
         title=_(u"Header"),
-        description=_(u"Header of the portlet."),
+        description=_(u"Header of the RSS Portlet."),
         required=True,
         default=u'New in the Cloud')
 
@@ -114,7 +114,8 @@ class Renderer(base.DeferredRenderer):
 class AddForm(base.AddForm):
     form_fields = form.Fields(ISpecialRSSPortlet)
     label = _(u"Add Special RSS portlet")
-    description = _(u"A portlet displaying multiple RSS sources.")
+    description = _(u"A portlet displaying multiple RSS sources "
+                    u"(Its sources are link objects).")
 
     def create(self, data):
         return Assignment(**data)
@@ -123,7 +124,8 @@ class AddForm(base.AddForm):
 class EditForm(base.EditForm):
     form_fields = form.Fields(ISpecialRSSPortlet)
     label = _(u"Edit Special RSS portlet")
-    description = _(u"A portlet displaying multiple RSS sources.")
+    description = _(u"A portlet displaying multiple RSS sources "
+                    u"(Its sources are link objects).")
 
 
 from HTMLParser import HTMLParser
