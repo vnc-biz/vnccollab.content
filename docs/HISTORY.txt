@@ -4,7 +4,7 @@ Changelog
 1.5.10 - unreleased
 -------------------
 
-- Add Etherpad portlet [11085].
+- Moves theme's portltes [11086].
   [Jose Dinuncio]
 
 - Cleans setup [11081].

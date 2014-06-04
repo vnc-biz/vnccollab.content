@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      tal:omit-tag="">
+  <dl class="portlet portletSpecialRSS"
+    i18n:domain="vnccollab.content"
+    tal:define="portal_url context/portal_url">
+
+    <dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        <span i18n:translate=""
+              tal:content="view/data/header">New in the Cloud</span>
+        <span class="portletTopRight"></span>
+    </dt>
+
+    <dd class="portletItem">
+
+      <div class="special-rss-feed"
+           tal:attributes="id python:'special-rss-feed-'+feed.id"
+           tal:repeat="feed view/feeds">
+
+        <div class="special-rss-item"
+             style="display: none"
+             tal:repeat="item python:view.items(feed)">
+          <h2><a href="" tal:content="item/title"
+                 tal:attributes="href item/url">Item title</a></h2>
+          <div tal:content="item/summary">Item body</div>
+        </div>
+
+      </div>
+
+      <ul class="special-rss-nav">
+        <li><a id="special-rss-nav-prev">Previous</a></li>
+        <li><a id="special-rss-nav-next">Next</a></li>
+      </ul>
+
+      <ul class="special-rss-links"
+          tal:define="source view/data/source">
+        <li tal:repeat="item source">
+          <a tal:attributes="feed item/id"
+             tal:content="item/title">VNC RSS</a>
+        </li>
+      </ul>
+
+    </dd>
+  </dl>
+</html>

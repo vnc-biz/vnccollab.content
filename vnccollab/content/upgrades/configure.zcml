@@ -9,7 +9,7 @@
       sortkey="1"
       profile="vnccollab.content:default">
 
-        <genericsetup:upgradeDepends
+      <genericsetup:upgradeDepends
           title="Run component registry and registry step"
           import_steps="componentregistry memberdata-properties plone.app.registry"
           />
@@ -21,7 +21,7 @@
       sortkey="2"
       profile="vnccollab.content:default">
 
-        <genericsetup:upgradeDepends
+      <genericsetup:upgradeDepends
           title="Adds js and css for user profile tabs"
           import_steps="jsregistry cssregistry"
           />
@@ -33,8 +33,8 @@
       sortkey="3"
       profile="vnccollab.content:default">
 
-        <genericsetup:upgradeDepends
-          title="Adds etherpad portlet"
+      <genericsetup:upgradeDepends
+          title="Adds theme portlet migrated to content"
           import_steps="portlets memberdata-properties"
           />
     </genericsetup:upgradeSteps>
