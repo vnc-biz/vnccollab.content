@@ -4,6 +4,9 @@ Changelog
 1.5.10 - unreleased
 -------------------
 
+- Add Etherpad portlet [11085].
+  [Jose Dinuncio]
+
 - Cleans setup [11081].
   [Jose Dinuncio]
 

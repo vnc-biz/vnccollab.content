@@ -1,0 +1,71 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      tal:omit-tag="">
+<dl class="portlet portlet-deferred portletEtherpadsList"
+    tal:attributes="portlet-manager view/metadata/manager;
+                    portlet-name    view/metadata/name;
+                    portlet-key     view/metadata/key;"
+    i18n:domain="vnccollab.content">
+
+    <dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        <a href="/ep/padlist/all-pads"
+           class="tile"
+           target="_blank"
+           tal:attributes="href string:${view/root_url}${attrs/href}"
+           tal:content="view/data/header"
+           i18n:translate="">Etherpads List</a>
+        <span class="portletTopRight"></span>
+    </dt>
+
+    <dd class="portletBodyWrapper">
+      <div class="portletLoading"
+           tal:condition="view/initializing">
+          <img tal:attributes="src string:${context/portal_url}/spinner.gif" alt="" />
+      </div>
+
+      <ul class="portletBody noSlimScroll"
+          tal:condition="not:view/initializing">
+        <tal:items tal:repeat="elem view/pads">
+        <li tal:define="oddrow repeat/elem/odd"
+             tal:attributes="class python:oddrow and 'portletItem even' or 'portletItem odd'">
+            <a href=""
+               class="tile"
+               target="_blank"
+               tal:attributes="href elem/url;
+                               title elem/title">
+                <span tal:replace="elem/title">First Pad</span>
+            </a>
+            <div class="portletItemDetails">
+              <strong>Last Edited:</strong>
+              <tal:date content="elem/date" /></div>
+            <div class="portletItemDetails">
+              <strong>Editors:</strong>
+              <tal:editors repeat="editor elem/editors">
+              <a href="#"
+                 title=""
+                 tal:attributes="href editor/url;
+                                 title editor/name"
+                 tal:content="editor/name"
+                 i18n:attributes="title"
+                 i18n:translate="">Author Name</a><tal:sep condition="not:repeat/editor/end">, </tal:sep>
+              </tal:editors>
+            </div>
+        </li>
+        </tal:items>
+      </ul>
+    </dd>
+
+    <dd class="portletFooter" style="visibility:hidden">
+        <span class="portletBottomLeft"></span>
+        <a href="/ep/padlist/all-pads"
+           title="Check all pads"
+           target="_blank"
+           tal:attributes="href string:${view/root_url}${attrs/href}"
+           i18n:attributes="title"
+           i18n:translate="">All pads&hellip;</a>
+        <span class="portletBottomRight"></span>
+    </dd>
+</dl>
+</html>
