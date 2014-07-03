@@ -28,7 +28,7 @@ into your Zope instance.
 Alternatively, if you are using zc.buildout and the plone.recipe.zope2instance
 recipe to manage your project, you can do this:
 
-* Add ``vnccollab.content`` to the list of eggs to install, e.g.:
+* Add ``vnccollab.content`` to the list of eggs to install, e.g.: ::
 
     [buildout]
     ...
@@ -36,7 +36,7 @@ recipe to manage your project, you can do this:
         ...
         vnccollab.content
        
-* Tell the plone.recipe.zope2instance recipe to install a ZCML slug:
+* Tell the plone.recipe.zope2instance recipe to install a ZCML slug: ::
 
     [instance]
     recipe = plone.recipe.zope2instance
@@ -44,7 +44,7 @@ recipe to manage your project, you can do this:
     zcml =
         vnccollab.content
       
-* Re-run buildout, e.g. with:
+* Re-run buildout, e.g. with: ::
 
     $ ./bin/buildout
         

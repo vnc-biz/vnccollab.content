@@ -9,7 +9,7 @@
       sortkey="1"
       profile="vnccollab.content:default">
 
-        <genericsetup:upgradeDepends
+      <genericsetup:upgradeDepends
           title="Run component registry and registry step"
           import_steps="componentregistry memberdata-properties plone.app.registry"
           />
@@ -21,10 +21,31 @@
       sortkey="2"
       profile="vnccollab.content:default">
 
-        <genericsetup:upgradeDepends
+      <genericsetup:upgradeDepends
           title="Adds js and css for user profile tabs"
           import_steps="jsregistry cssregistry"
           />
     </genericsetup:upgradeSteps>
+
+    <genericsetup:upgradeSteps
+      source="1003"
+      destination="1004"
+      sortkey="3"
+      profile="vnccollab.content:default">
+
+      <genericsetup:upgradeDepends
+          title="Adds theme portlet migrated to content"
+          import_steps="portlets memberdata-properties"
+          />
+    </genericsetup:upgradeSteps>
+
+    <genericsetup:upgradeStep
+      source="1003"
+      destination="1004"
+      sortkey="4"
+      profile="vnccollab.content:default"
+      title="Replace old portlets with new ones"
+      handler="vnccollab.content.upgrades.upgrades.upgrade_1003_1004"
+      />
 
 </configure>

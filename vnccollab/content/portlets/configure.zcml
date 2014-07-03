@@ -3,10 +3,50 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="vnccollab.content">
 
-  <!-- Ensure Plone's portlets ZCML has already been processed;
-       without this, we may get a permission lookup error -->
   <include package="plone.app.portlets" />
 
-	<!-- -*- extra stuff goes here -*- -->
+  <plone:portlet
+      name="vnccollab.content.portlets.EtherpadsListPortlet"
+      interface=".etherpads_list.IEtherpadsListPortlet"
+      assignment=".etherpads_list.Assignment"
+      view_permission="zope2.View"
+      edit_permission="cmf.ManagePortal"
+      renderer=".etherpads_list.Renderer"
+      addview=".etherpads_list.AddForm"
+      editview=".etherpads_list.EditForm"
+      />
+
+  <plone:portlet
+      name="vnccollab.content.portlets.GenericIframePortlet"
+      interface=".generic_iframe.IGenericIframePortlet"
+      assignment=".generic_iframe.Assignment"
+      view_permission="zope2.View"
+      edit_permission="cmf.ManagePortal"
+      renderer=".generic_iframe.Renderer"
+      addview=".generic_iframe.AddForm"
+      editview=".generic_iframe.EditForm"
+      />
+
+  <plone:portlet
+      name="vnccollab.content.portlets.SpecialRSSPortlet"
+      interface=".special_rss.ISpecialRSSPortlet"
+      assignment=".special_rss.Assignment"
+      view_permission="zope2.View"
+      edit_permission="cmf.ManagePortal"
+      renderer=".special_rss.Renderer"
+      addview=".special_rss.AddForm"
+      editview=".special_rss.EditForm"
+      />
+
+  <plone:portlet
+      name="vnccollab.content.portlets.UsersBoxPortlet"
+      interface=".users_box.IUsersBoxPortlet"
+      assignment=".users_box.Assignment"
+      view_permission="zope2.View"
+      edit_permission="cmf.ManagePortal"
+      renderer=".users_box.Renderer"
+      addview=".users_box.AddForm"
+      editview=".users_box.EditForm"
+      />
 
 </configure>

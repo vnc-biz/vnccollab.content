@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      tal:omit-tag="">
+<dl class="portlet portletUsersBox"
+    i18n:domain="vnccollab.content">
+
+  <dt class="portletHeader"
+      tal:condition="view/header">
+    <span class="portletTopLeft"></span>
+    <a href=""
+       tal:attributes="href string:${context/portal_url}/Members"
+       tal:content="view/header">Users</a>
+    <span class="portletTopRight"></span>
+  </dt>
+
+  <dd class="portletBodyWrapper">
+    <ul class="portletBody">
+      <li class="portletItem">
+        <tal:users repeat="user view/users">
+        <span class="bubbleInfo">
+          <a class="userBox trigger"
+             href="#"
+             title="Username"
+             tal:attributes="href user/url;
+                             title user/id">
+            <img alt="Username" src="#"
+                 tal:replace="structure user/img" />
+          </a>
+          <div class="bubbleinfo-popup">
+            <strong><span tal:replace="user/fullname" /></strong>
+          </div>
+        </span>
+        </tal:users>
+      </li>
+    </ul>
+    <div class="visualClear"><!-- --></div>
+  </dd>
+</dl>
+</html>

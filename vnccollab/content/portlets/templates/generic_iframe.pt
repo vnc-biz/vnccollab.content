@@ -1,0 +1,27 @@
+  <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      tal:omit-tag="">
+<dl class="portlet portletIframe"
+    i18n:domain="vnccollab.content">
+
+    <dt class="portletHeader">
+        <span class="portletTopLeft" tal:content="view/data/header">
+          Generic Iframe
+        </span>
+    </dt>
+
+    <dd class="portletBodyWrapper">
+      <iframe tal:attributes="src    view/data/uri;
+                              width  view/data/width;
+                              height view/data/height;">
+        You need a browser that supports IFRAME to see this content.
+      </iframe>
+    </dd>
+
+    <dd class="portletFooter">
+        <span class="portletBottomLeft"></span>
+        <span class="portletBottomRight"></span>
+    </dd>
+</dl>
+</html>
